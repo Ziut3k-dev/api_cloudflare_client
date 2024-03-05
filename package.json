@@ -1,6 +1,6 @@
 {
   "name": "api_cloudflare_client",
-  "version": "2.12.0",
+  "version": "2.13.0",
   "description": "CloudFlare API client",
   "author": "Krzysztof Włodarski <wlodarski.dvy@gmail.com>",
   "bugs": {
