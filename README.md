@@ -1,21 +1,16 @@
 # Cloudflare Node.js bindings
 Forked from [cloudflare/node-cloudflare](https://github.com/cloudflare/node-cloudflare)
 
-[//]: # ([![Stability Stable])
-
-[//]: # ([badge-stability]])
-
-[//]: # ([badge-stability-url])
-
+[![Stability Stable][badge-stability]][badge-stability-url]
+[![Coveralls][badge-coveralls]][badge-coveralls-url]
 [![NPM version][badge-npm]][badge-npm-url]
+[![Libraries.io Dependencies][badge-libraries]][badge-libraries-url]
+[![NPM downloads][badge-npm-downloads]][badge-npm-downloads]
 
 [//]: # ([![Travis CI][badge-travis]][badge-travis-url])
 
-[//]: # ([![Coveralls][badge-coveralls]][badge-coveralls-url])
 
-[![NPM downloads][badge-npm-downloads]][badge-npm-downloads]
 
-[![Libraries.io Dependencies][badge-libraries]][badge-libraries-url]
 
 [badge-stability]: https://img.shields.io/badge/stability-stable-green.svg?style=flat-square
 [badge-stability-url]: https://github.com/dominictarr/stability/blob/4d649a5b3af8444720929a50254dfbb071ce27e7/levels.json#L8-L9
@@ -40,7 +35,7 @@ With these bindings, you'll get the following features:
   leveraged for async/await and generator support.
 * Automatic handling of Gzip/Deflate compression.
 
-Node.js v4 and greater are supported.
+Node.js v12 and greater are supported.
 
 ## Configuration
 
