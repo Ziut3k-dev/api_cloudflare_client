@@ -52,7 +52,7 @@ the [My Profile -> API Tokens][api-tokens] page in the Cloudflare dashboard.
 [api-tokens]: https://dash.cloudflare.com/profile/api-tokens
 
 ```javascript
-var cf = require('cloudflare')({
+var cf = require('api_cloudflare_client')({
   email: 'you@example.com',
   key: 'your Cloudflare API key'
 });
@@ -65,7 +65,7 @@ Create your token on the [My Profile -> API Tokens][api-tokens] page in the Clou
 [api-tokens]: https://dash.cloudflare.com/profile/api-tokens
 
 ```javascript
-var cf = require('cloudflare')({
+var cf = require('api_cloudflare_client')({
   token: 'your Cloudflare API token'
 });
 ```
