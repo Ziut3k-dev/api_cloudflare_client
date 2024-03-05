@@ -1,6 +1,6 @@
 {
   "name": "api_cloudflare_client",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "CloudFlare API client",
   "author": "Krzysztof Włodarski <wlodarski.dvy@gmail.com>",
   "bugs": {
@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "autocreate": "^1.1.0",
+    "axios": "^1.6.7",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
