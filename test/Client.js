@@ -55,14 +55,12 @@ describeMocha('HTTP Client', () => {
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        getter.got(
-          'https://api.cloudflare.com/client/v4/example/42',
-          td.matchers.contains(options)
-        )
+    td.when(
+      getter.got(
+        'https://api.cloudflare.com/client/v4/example/42',
+        td.matchers.contains(options)
       )
-      .thenResolve({body});
+    ).thenResolve({body});
 
     const subject = new Client({
       email,
@@ -100,14 +98,12 @@ describeMocha('HTTP Client', () => {
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        getter.got(
-          'https://api.cloudflare.com/client/v4/example/42',
-          td.matchers.contains(options)
-        )
+    td.when(
+      getter.got(
+        'https://api.cloudflare.com/client/v4/example/42',
+        td.matchers.contains(options)
       )
-      .thenResolve({body});
+    ).thenResolve({body});
 
     const subject = new Client({});
 
@@ -150,14 +146,12 @@ describeMocha('HTTP Client', () => {
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        getter.got(
-          'https://api.cloudflare.com/client/v4/example/42',
-          td.matchers.contains(options)
-        )
+    td.when(
+      getter.got(
+        'https://api.cloudflare.com/client/v4/example/42',
+        td.matchers.contains(options)
       )
-      .thenResolve({body});
+    ).thenResolve({body});
 
     const subject = new Client({
       email,
@@ -200,14 +194,12 @@ describeMocha('HTTP Client', () => {
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        getter.got(
-          'https://api.cloudflare.com/client/v4/example/42',
-          td.matchers.contains(options)
-        )
+    td.when(
+      getter.got(
+        'https://api.cloudflare.com/client/v4/example/42',
+        td.matchers.contains(options)
       )
-      .thenResolve({body});
+    ).thenResolve({body});
 
     const subject = new Client({
       token,
@@ -246,14 +238,12 @@ describeMocha('HTTP Client', () => {
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        getter.got(
-          'https://api.cloudflare.com/client/v4/example/42',
-          td.matchers.contains(options)
-        )
+    td.when(
+      getter.got(
+        'https://api.cloudflare.com/client/v4/example/42',
+        td.matchers.contains(options)
       )
-      .thenResolve({body});
+    ).thenResolve({body});
 
     const subject = new Client({
       email: 'other@domain.email',

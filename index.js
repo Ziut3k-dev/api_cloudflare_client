@@ -15,6 +15,7 @@ const proxy = require('./lib/proxy');
 
 /* eslint-disable global-require */
 const resources = {
+  firewallRule: require('./lib/resources/Firewall'),
   accessApplications: require('./lib/resources/AccessApplications'),
   argoTunnels: require('./lib/resources/ArgoTunnels'),
   dnsRecords: require('./lib/resources/DNSRecords'),

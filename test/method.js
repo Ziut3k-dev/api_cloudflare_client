@@ -47,21 +47,19 @@ describeMocha('method', () => {
 
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'GET',
-          '/',
-          {},
-          {
-            auth: {},
-            headers: {},
-            json: true,
-            contentType: 'application/json',
-          }
-        )
+    td.when(
+      client.request(
+        'GET',
+        '/',
+        {},
+        {
+          auth: {},
+          headers: {},
+          json: true,
+          contentType: 'application/json',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({}).bind(resource);
 
@@ -80,21 +78,19 @@ describeMocha('method', () => {
 
     td.when(resource.createFullPath(':id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'POST',
-          'example/42',
-          {},
-          {
-            auth: {},
-            headers: {},
-            json: true,
-            contentType: 'application/json',
-          }
-        )
+    td.when(
+      client.request(
+        'POST',
+        'example/42',
+        {},
+        {
+          auth: {},
+          headers: {},
+          json: true,
+          contentType: 'application/json',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({
       method: 'POST',
@@ -134,23 +130,21 @@ describeMocha('method', () => {
 
     td.when(resource.createFullPath(':id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'POST',
-          'example/42',
-          {
-            name: 'world',
-          },
-          {
-            auth: {},
-            headers: {},
-            json: true,
-            contentType: 'application/json',
-          }
-        )
+    td.when(
+      client.request(
+        'POST',
+        'example/42',
+        {
+          name: 'world',
+        },
+        {
+          auth: {},
+          headers: {},
+          json: true,
+          contentType: 'application/json',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({
       method: 'POST',
@@ -174,24 +168,22 @@ describeMocha('method', () => {
 
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'GET',
-          '/',
-          {},
-          {
-            auth: {
-              key: 'SCA1EAB1E',
-              email: 'other@domain.email',
-            },
-            headers: {},
-            json: true,
-            contentType: 'application/json',
-          }
-        )
+    td.when(
+      client.request(
+        'GET',
+        '/',
+        {},
+        {
+          auth: {
+            key: 'SCA1EAB1E',
+            email: 'other@domain.email',
+          },
+          headers: {},
+          json: true,
+          contentType: 'application/json',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({}).bind(resource);
 
@@ -213,26 +205,24 @@ describeMocha('method', () => {
 
     td.when(resource.createFullPath(':id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'POST',
-          'example/42',
-          {
-            name: 'world',
+    td.when(
+      client.request(
+        'POST',
+        'example/42',
+        {
+          name: 'world',
+        },
+        {
+          auth: {
+            key: 'SCA1EAB1E',
+            email: 'other@domain.email',
           },
-          {
-            auth: {
-              key: 'SCA1EAB1E',
-              email: 'other@domain.email',
-            },
-            headers: {},
-            json: true,
-            contentType: 'application/json',
-          }
-        )
+          headers: {},
+          json: true,
+          contentType: 'application/json',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({
       method: 'POST',
@@ -263,21 +253,19 @@ describeMocha('method', () => {
 
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'GET',
-          '/',
-          {},
-          {
-            auth: {},
-            headers: {},
-            json: false,
-            contentType: 'application/json',
-          }
-        )
+    td.when(
+      client.request(
+        'GET',
+        '/',
+        {},
+        {
+          auth: {},
+          headers: {},
+          json: false,
+          contentType: 'application/json',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({
       json: false,
@@ -298,21 +286,19 @@ describeMocha('method', () => {
 
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'GET',
-          '/',
-          {},
-          {
-            auth: {},
-            headers: {},
-            json: true,
-            contentType: 'application/javascript',
-          }
-        )
+    td.when(
+      client.request(
+        'GET',
+        '/',
+        {},
+        {
+          auth: {},
+          headers: {},
+          json: true,
+          contentType: 'application/javascript',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({
       contentType: 'application/javascript',
