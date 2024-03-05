@@ -8,6 +8,9 @@
   },
   "dependencies": {
     "autocreate": "^1.1.0",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.1.0",
     "es-class": "^2.1.1",
     "got": "^14.2.0",
     "https-proxy-agent": "^5.0.0",
@@ -17,7 +20,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.1.1",
-    "eslint": "^4.15.0",
+    "eslint": "^8.57.0",
     "eslint-config-es": "^0.8.12",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-eslint-comments": "^2.0.1",
@@ -46,7 +49,7 @@
     "url": "git+https://github.com/ziut3k-dev/node-cloudflare.git"
   },
   "scripts": {
-    "lint": "eslint '{index,{lib,test}/**/*}.js'",
+    "lint": "eslint '{index,{lib,test}/**/*}.js' --fix",
     "test": "nyc --reporter=lcov --reporter=text-summary mocha --require intelli-espower-loader --recursive test",
     "coverage": "cat ./coverage/lcov.info | coveralls"
   },

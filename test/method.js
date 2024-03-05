@@ -9,33 +9,33 @@
 
 const assert = require('power-assert');
 const td = require('testdouble');
-const mocha = require('mocha');
+const mochaModule = require('mocha');
 
-const describe = mocha.describe;
-const it = mocha.it;
-const beforeEach = mocha.beforeEach;
-const afterEach = mocha.afterEach;
+const describeMocha = mochaModule.describe;
+const itMocha = mochaModule.it;
+const beforeEachMocha = mochaModule.beforeEach;
+const afterEachMocha = mochaModule.afterEach;
 
 const Resource = require('../lib/Resource');
 const Client = require('../lib/Client');
 const method = require('../lib/method');
 
-describe('method', () => {
+describeMocha('method', () => {
   let FakeResource;
   let FakeClient;
 
-  beforeEach(done => {
+  beforeEachMocha(done => {
     FakeClient = td.constructor(Client);
     FakeResource = td.constructor(Resource);
 
     done();
   });
-  afterEach(done => {
+  afterEachMocha(done => {
     td.reset();
     done();
   });
 
-  it('should make basic request', () => {
+  itMocha('should make basic request', () => {
     const body = {
       hello: 'world',
     };
@@ -47,28 +47,26 @@ describe('method', () => {
 
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'GET',
-          '/',
-          {},
-          {
-            auth: {},
-            headers: {},
-            json: true,
-            contentType: 'application/json',
-          }
-        )
+    td.when(
+      client.request(
+        'GET',
+        '/',
+        {},
+        {
+          auth: {},
+          headers: {},
+          json: true,
+          contentType: 'application/json',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({}).bind(resource);
 
     return subject().then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should interpolate URL parameters', () => {
+  itMocha('should interpolate URL parameters', () => {
     const body = {
       hello: 'world',
     };
@@ -80,21 +78,19 @@ describe('method', () => {
 
     td.when(resource.createFullPath(':id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'POST',
-          'example/42',
-          {},
-          {
-            auth: {},
-            headers: {},
-            json: true,
-            contentType: 'application/json',
-          }
-        )
+    td.when(
+      client.request(
+        'POST',
+        'example/42',
+        {},
+        {
+          auth: {},
+          headers: {},
+          json: true,
+          contentType: 'application/json',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({
       method: 'POST',
@@ -104,7 +100,7 @@ describe('method', () => {
     return subject(42).then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should reject when URL parameters are not provided', () => {
+  itMocha('should reject when URL parameters are not provided', () => {
     const client = new FakeClient();
     const resource = new FakeResource();
 
@@ -123,7 +119,7 @@ describe('method', () => {
     );
   });
 
-  it('should extract data from arguments', () => {
+  itMocha('should extract data from arguments', () => {
     const body = {
       hello: 'world',
     };
@@ -134,23 +130,21 @@ describe('method', () => {
 
     td.when(resource.createFullPath(':id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'POST',
-          'example/42',
-          {
-            name: 'world',
-          },
-          {
-            auth: {},
-            headers: {},
-            json: true,
-            contentType: 'application/json',
-          }
-        )
+    td.when(
+      client.request(
+        'POST',
+        'example/42',
+        {
+          name: 'world',
+        },
+        {
+          auth: {},
+          headers: {},
+          json: true,
+          contentType: 'application/json',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({
       method: 'POST',
@@ -162,7 +156,7 @@ describe('method', () => {
     }).then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should extract options with no body', () => {
+  itMocha('should extract options witMochah no body', () => {
     const body = {
       hello: 'world',
     };
@@ -174,24 +168,22 @@ describe('method', () => {
 
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'GET',
-          '/',
-          {},
-          {
-            auth: {
-              key: 'SCA1EAB1E',
-              email: 'other@domain.email',
-            },
-            headers: {},
-            json: true,
-            contentType: 'application/json',
-          }
-        )
+    td.when(
+      client.request(
+        'GET',
+        '/',
+        {},
+        {
+          auth: {
+            key: 'SCA1EAB1E',
+            email: 'other@domain.email',
+          },
+          headers: {},
+          json: true,
+          contentType: 'application/json',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({}).bind(resource);
 
@@ -201,7 +193,7 @@ describe('method', () => {
     }).then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should extract options with body', () => {
+  itMocha('should extract options witMochah body', () => {
     const body = {
       hello: 'world',
     };
@@ -213,26 +205,24 @@ describe('method', () => {
 
     td.when(resource.createFullPath(':id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'POST',
-          'example/42',
-          {
-            name: 'world',
+    td.when(
+      client.request(
+        'POST',
+        'example/42',
+        {
+          name: 'world',
+        },
+        {
+          auth: {
+            key: 'SCA1EAB1E',
+            email: 'other@domain.email',
           },
-          {
-            auth: {
-              key: 'SCA1EAB1E',
-              email: 'other@domain.email',
-            },
-            headers: {},
-            json: true,
-            contentType: 'application/json',
-          }
-        )
+          headers: {},
+          json: true,
+          contentType: 'application/json',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({
       method: 'POST',
@@ -251,7 +241,7 @@ describe('method', () => {
     ).then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should set json when specified', () => {
+  itMocha('should set json when specified', () => {
     const body = {
       hello: 'world',
     };
@@ -263,21 +253,19 @@ describe('method', () => {
 
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'GET',
-          '/',
-          {},
-          {
-            auth: {},
-            headers: {},
-            json: false,
-            contentType: 'application/json',
-          }
-        )
+    td.when(
+      client.request(
+        'GET',
+        '/',
+        {},
+        {
+          auth: {},
+          headers: {},
+          json: false,
+          contentType: 'application/json',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({
       json: false,
@@ -286,7 +274,7 @@ describe('method', () => {
     return subject().then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should set content-type when specified', () => {
+  itMocha('should set content-type when specified', () => {
     const body = {
       hello: 'world',
     };
@@ -298,21 +286,19 @@ describe('method', () => {
 
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        client.request(
-          'GET',
-          '/',
-          {},
-          {
-            auth: {},
-            headers: {},
-            json: true,
-            contentType: 'application/javascript',
-          }
-        )
+    td.when(
+      client.request(
+        'GET',
+        '/',
+        {},
+        {
+          auth: {},
+          headers: {},
+          json: true,
+          contentType: 'application/javascript',
+        }
       )
-      .thenResolve(body);
+    ).thenResolve(body);
 
     const subject = method({
       contentType: 'application/javascript',

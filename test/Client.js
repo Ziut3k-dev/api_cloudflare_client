@@ -9,30 +9,30 @@
 
 const assert = require('power-assert');
 const td = require('testdouble');
-const mocha = require('mocha');
+const mochaModule = require('mocha');
 
-const describe = mocha.describe;
-const it = mocha.it;
-const beforeEach = mocha.beforeEach;
-const afterEach = mocha.afterEach;
+const describeMocha = mochaModule.describe;
+const itMocha = mochaModule.it;
+const beforeEachMocha = mochaModule.beforeEach;
+const afterEachMocha = mochaModule.afterEach;
 
-describe('HTTP Client', () => {
+describeMocha('HTTP Client', () => {
   let FakeGetter;
   let Client;
 
-  beforeEach(done => {
+  beforeEachMocha(done => {
     FakeGetter = td.replace('../lib/Getter');
     Client = require('../lib/Client'); // eslint-disable-line global-require
 
     done();
   });
 
-  afterEach(done => {
+  afterEachMocha(done => {
     td.reset();
     done();
   });
 
-  it('should convert data into query parameters in GET requests', () => {
+  itMocha('should convert data into query parameters in GET requests', () => {
     const getter = new FakeGetter();
     const email = 'fake@domain.email';
     const key = 'DEADBEEF';
@@ -55,14 +55,12 @@ describe('HTTP Client', () => {
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        getter.got(
-          'https://api.cloudflare.com/client/v4/example/42',
-          td.matchers.contains(options)
-        )
+    td.when(
+      getter.got(
+        'https://api.cloudflare.com/client/v4/example/42',
+        td.matchers.contains(options)
       )
-      .thenResolve({body});
+    ).thenResolve({body});
 
     const subject = new Client({
       email,
@@ -84,7 +82,7 @@ describe('HTTP Client', () => {
     return res.then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should pass data as body for non-GET requests', () => {
+  itMocha('should pass data as body for non-GET requests', () => {
     const getter = new FakeGetter();
     const body = {
       hello: 'world',
@@ -100,14 +98,12 @@ describe('HTTP Client', () => {
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        getter.got(
-          'https://api.cloudflare.com/client/v4/example/42',
-          td.matchers.contains(options)
-        )
+    td.when(
+      getter.got(
+        'https://api.cloudflare.com/client/v4/example/42',
+        td.matchers.contains(options)
       )
-      .thenResolve({body});
+    ).thenResolve({body});
 
     const subject = new Client({});
 
@@ -128,7 +124,7 @@ describe('HTTP Client', () => {
     return res.then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should support User Service Auth keys', () => {
+  itMocha('should support User Service Auth keys', () => {
     const getter = new FakeGetter();
     const email = 'fake@domain.email';
     const key = 'v1.0-DEADBEEF';
@@ -150,14 +146,12 @@ describe('HTTP Client', () => {
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        getter.got(
-          'https://api.cloudflare.com/client/v4/example/42',
-          td.matchers.contains(options)
-        )
+    td.when(
+      getter.got(
+        'https://api.cloudflare.com/client/v4/example/42',
+        td.matchers.contains(options)
       )
-      .thenResolve({body});
+    ).thenResolve({body});
 
     const subject = new Client({
       email,
@@ -179,7 +173,7 @@ describe('HTTP Client', () => {
     return res.then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should support API Tokens', () => {
+  itMocha('should support API Tokens', () => {
     const getter = new FakeGetter();
     const token = 'vr29SNZEpswxdp';
     const body = {
@@ -200,14 +194,12 @@ describe('HTTP Client', () => {
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        getter.got(
-          'https://api.cloudflare.com/client/v4/example/42',
-          td.matchers.contains(options)
-        )
+    td.when(
+      getter.got(
+        'https://api.cloudflare.com/client/v4/example/42',
+        td.matchers.contains(options)
       )
-      .thenResolve({body});
+    ).thenResolve({body});
 
     const subject = new Client({
       token,
@@ -228,7 +220,7 @@ describe('HTTP Client', () => {
     return res.then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should override authentication', () => {
+  itMocha('should override authentication', () => {
     const getter = new FakeGetter();
     const body = {
       hello: 'world',
@@ -246,14 +238,12 @@ describe('HTTP Client', () => {
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td
-      .when(
-        getter.got(
-          'https://api.cloudflare.com/client/v4/example/42',
-          td.matchers.contains(options)
-        )
+    td.when(
+      getter.got(
+        'https://api.cloudflare.com/client/v4/example/42',
+        td.matchers.contains(options)
       )
-      .thenResolve({body});
+    ).thenResolve({body});
 
     const subject = new Client({
       email: 'other@domain.email',

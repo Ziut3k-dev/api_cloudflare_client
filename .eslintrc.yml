@@ -1,7 +1,8 @@
+#parser: babel-eslint
 extends:
-  - es/2015/server
+  - eslint:recommended
   - plugin:prettier/recommended
-  - plugin:eslint-comments/recommended
+#  - plugin:eslint-comments/recommended
   - plugin:node/recommended
   - plugin:security/recommended
   - plugin:promise/recommended

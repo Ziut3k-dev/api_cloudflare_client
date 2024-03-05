@@ -8,33 +8,33 @@
 'use strict';
 
 const assert = require('power-assert');
-const mocha = require('mocha');
+const mochaModule = require('mocha');
 const prototypal = require('es-class');
 const td = require('testdouble');
 
-const describe = mocha.describe;
-const it = mocha.it;
-const beforeEach = mocha.beforeEach;
-const afterEach = mocha.afterEach;
+const describeMocha = mochaModule.describe;
+const itMocha = mochaModule.it;
+const beforeEachMocha = mochaModule.beforeEach;
+const afterEachMocha = mochaModule.afterEach;
 
 const Resource = require('../lib/Resource');
 const Client = require('../lib/Client');
 
-describe('Resource', () => {
+describeMocha('Resource', () => {
   let FakeClient;
 
-  beforeEach(done => {
+  beforeEachMocha(done => {
     FakeClient = td.constructor(Client);
 
     done();
   });
 
-  afterEach(done => {
+  afterEachMocha(done => {
     td.reset();
     done();
   });
 
-  it('creates an instance of a Resource', done => {
+  itMocha('creates an instance of a Resource', done => {
     const client = new FakeClient();
     const subject = new Resource(client);
 
@@ -44,8 +44,8 @@ describe('Resource', () => {
     done();
   });
 
-  describe('createFullPath', () => {
-    it('returns root when unconfigured', done => {
+  describeMocha('createFullPath', () => {
+    itMocha('returns root when unconfigured', done => {
       const client = new FakeClient();
       const subject = new Resource(client);
 
@@ -56,7 +56,7 @@ describe('Resource', () => {
       done();
     });
 
-    it('joins method path with resource path', done => {
+    itMocha('joins method path witMochah resource path', done => {
       const client = new FakeClient();
       const subject = new Resource(client);
 
@@ -70,8 +70,8 @@ describe('Resource', () => {
     });
   });
 
-  describe('subclass', () => {
-    it('creates and instance of Resource and Klass', done => {
+  describeMocha('subclass', () => {
+    itMocha('creates and instance of Resource and Klass', done => {
       const Klass = prototypal({
         extends: Resource,
       });
@@ -85,7 +85,7 @@ describe('Resource', () => {
       done();
     });
 
-    it('joins method path with resource path', done => {
+    itMocha('joins method path witMochah resource path', done => {
       const Klass = prototypal({
         extends: Resource,
         path: 'example',
@@ -100,7 +100,7 @@ describe('Resource', () => {
       done();
     });
 
-    it('includes basic methods', done => {
+    itMocha('includes basic methods', done => {
       const Klass = prototypal({
         extends: Resource,
         includeBasic: ['browse', 'del'],
