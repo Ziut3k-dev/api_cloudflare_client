@@ -1,6 +1,6 @@
 {
   "name": "api_cloudflare_client",
-  "version": "2.16.0",
+  "version": "2.17.0",
   "publisher": "ziut3k-dev",
   "description": "CloudFlare API client",
   "author": "Krzysztof Włodarski <wlodarski.dvy@gmail.com>",
@@ -11,6 +11,18 @@
     "node": ">= 12.0.0",
     "npm": ">= 8.0.0"
   },
+  "exports": {
+    ".": {
+      "import": "./index.d.ts",
+      "require": "./index.d.ts"
+    }
+  },
+  "owners": [
+    {
+      "name": "Krzysztof Włodarski",
+      "githubUsername": "Ziut3k-dev"
+    }
+  ],
   "dependencies": {
     "autocreate": "^1.1.0",
     "axios": "^1.6.7",
