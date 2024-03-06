@@ -17,12 +17,12 @@ Forked from [cloudflare/node-cloudflare](https://github.com/cloudflare/node-clou
 [badge-npm]: https://img.shields.io/npm/v/api_cloudflare_client.svg?style=flat-square
 [badge-npm-downloads]: https://img.shields.io/npm/dm/api_cloudflare_client.svg?style=flat-square
 [badge-npm-url]: https://www.npmjs.com/package/api_cloudflare_client
-[badge-travis]: https://img.shields.io/travis/cloudflare/node-cloudflare/master.svg?style=flat-square
-[badge-travis-url]: https://travis-ci.org/cloudflare/node-cloudflare
-[badge-coveralls]: https://img.shields.io/coveralls/github/cloudflare/node-cloudflare/master.svg?style=flat-square
-[badge-coveralls-url]: https://coveralls.io/github/Ziut3k-dev/node-cloudflare
-[badge-libraries]: https://img.shields.io/librariesio/github/Ziut3k-dev/node-cloudflare.svg?style=flat-square
-[badge-libraries-url]: https://libraries.io/github/Ziut3k-dev/node-cloudflare
+[badge-travis]: https://img.shields.io/travis/ziut3k-dev/api_cloudflare_client/master.svg?style=flat-square
+[badge-travis-url]: https://travis-ci.org/ziut3k-dev/api_cloudflare_client
+[badge-coveralls]: https://img.shields.io/coveralls/github/ziut3k-dev/api_cloudflare_client/master.svg?style=flat-square
+[badge-coveralls-url]: https://coveralls.io/github/Ziut3k-dev/api_cloudflare_client
+[badge-libraries]: https://img.shields.io/librariesio/github/Ziut3k-dev/api_cloudflare_client.svg?style=flat-square
+[badge-libraries-url]: https://libraries.io/github/Ziut3k-dev/api_cloudflare_client
 
 [Cloudflare v4 API][cf-api] bindings for Node.js, providing a sourdough
 "BREAD" (Browse, Read, Edit, Add, and Delete) interface.
