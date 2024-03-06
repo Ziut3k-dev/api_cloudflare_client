@@ -1,41 +1,29 @@
-/*
- * Copyright (C) 2014-present Cloudflare, Inc.
-
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 'use strict';
 
-const assert = require('power-assert');
+const assert = require('assert');
 const td = require('testdouble');
-const mochaModule = require('mocha');
-
-const describeMocha = mochaModule.describe;
-const itMocha = mochaModule.it;
-const beforeEachMocha = mochaModule.beforeEach;
-const afterEachMocha = mochaModule.afterEach;
+const {describe, it, beforeEach, afterEach} = require('@jest/globals');
 
 const Resource = require('../lib/Resource');
 const Client = require('../lib/Client');
 const method = require('../lib/method');
 
-describeMocha('method', () => {
+describe('method', () => {
   let FakeResource;
   let FakeClient;
 
-  beforeEachMocha(done => {
+  beforeEach(done => {
     FakeClient = td.constructor(Client);
     FakeResource = td.constructor(Resource);
 
     done();
   });
-  afterEachMocha(done => {
+  afterEach(done => {
     td.reset();
     done();
   });
 
-  itMocha('should make basic request', () => {
+  it('should make basic request', () => {
     const body = {
       hello: 'world',
     };
@@ -66,7 +54,7 @@ describeMocha('method', () => {
     return subject().then(resp => assert.deepEqual(resp, body));
   });
 
-  itMocha('should interpolate URL parameters', () => {
+  it('should interpolate URL parameters', () => {
     const body = {
       hello: 'world',
     };
@@ -100,7 +88,7 @@ describeMocha('method', () => {
     return subject(42).then(resp => assert.deepEqual(resp, body));
   });
 
-  itMocha('should reject when URL parameters are not provided', () => {
+  it('should reject when URL parameters are not provided', () => {
     const client = new FakeClient();
     const resource = new FakeResource();
 
@@ -119,7 +107,7 @@ describeMocha('method', () => {
     );
   });
 
-  itMocha('should extract data from arguments', () => {
+  it('should extract data from arguments', () => {
     const body = {
       hello: 'world',
     };
@@ -156,7 +144,7 @@ describeMocha('method', () => {
     }).then(resp => assert.deepEqual(resp, body));
   });
 
-  itMocha('should extract options witMochah no body', () => {
+  it('should extract options with no body', () => {
     const body = {
       hello: 'world',
     };
@@ -193,7 +181,7 @@ describeMocha('method', () => {
     }).then(resp => assert.deepEqual(resp, body));
   });
 
-  itMocha('should extract options witMochah body', () => {
+  it('should extract options with body', () => {
     const body = {
       hello: 'world',
     };
@@ -241,7 +229,7 @@ describeMocha('method', () => {
     ).then(resp => assert.deepEqual(resp, body));
   });
 
-  itMocha('should set json when specified', () => {
+  it('should set json when specified', () => {
     const body = {
       hello: 'world',
     };
@@ -274,7 +262,7 @@ describeMocha('method', () => {
     return subject().then(resp => assert.deepEqual(resp, body));
   });
 
-  itMocha('should set content-type when specified', () => {
+  it('should set content-type when specified', () => {
     const body = {
       hello: 'world',
     };

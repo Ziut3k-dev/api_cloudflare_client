@@ -7,16 +7,13 @@
 
 'use strict';
 
-const assert = require('power-assert');
-const mochaModule = require('mocha');
+const assert = require('assert');
+const {describe, it} = require('@jest/globals');
 
 const proxy = require('../lib/proxy');
 
-const describeMocha = mochaModule.describe;
-const itMocha = mochaModule.it;
-
-describeMocha('proxy agents', () => {
-  itMocha('should not return an agent when parameters are not set', done => {
+describe('proxy agents', () => {
+  it('should not return an agent when parameters are not set', done => {
     const tests = [
       ['', '', 'example.com'],
       [null, null, 'http://example.com/'],
@@ -31,7 +28,7 @@ describeMocha('proxy agents', () => {
     done();
   });
 
-  itMocha('should not return an agent when noProxy matches base', done => {
+  it('should not return an agent when noProxy matches base', done => {
     const tests = [
       ['http://10.0.0.1:1234', 'example.com', 'http://example.com'],
       ['http://10.0.0.1:1234', '.example.com', 'http://example.com'],
@@ -47,7 +44,7 @@ describeMocha('proxy agents', () => {
     done();
   });
 
-  itMocha('should return an agent when noProxy is not set', done => {
+  it('should return an agent when noProxy is not set', done => {
     const tests = [
       ['http://10.0.0.1:1234', null, 'http://example.com'],
       ['http://10.0.0.1:1234', '', 'http://example.com'],
@@ -62,7 +59,7 @@ describeMocha('proxy agents', () => {
     done();
   });
 
-  itMocha("should return an agent when noProxy doesn't match", done => {
+  it("should return an agent when noProxy doesn't match", done => {
     const agent = proxy.proxyAgent(
       'http://10.0.0.1:1234',
       '.example.com',
