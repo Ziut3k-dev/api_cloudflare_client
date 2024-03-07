@@ -22,13 +22,13 @@ declare namespace Cloudflare {
 
   type ResponseObjectPromise = Promise<object>;
 
-  interface AuthObject {
+  export interface AuthObject {
     email?: string | undefined;
     key?: string | undefined;
     token?: string | undefined;
   }
 
-  interface DnsRecordWithoutPriority {
+  export interface DnsRecordWithoutPriority {
     type: Exclude<RecordTypes, 'MX' | 'SRV' | 'URI'>;
     name: string;
     content: string;
@@ -36,7 +36,7 @@ declare namespace Cloudflare {
     proxied?: boolean | undefined;
   }
 
-  interface DnsRecordWithPriority {
+  export interface DnsRecordWithPriority {
     type: Extract<RecordTypes, 'MX' | 'URI'>;
     name: string;
     content: string;
@@ -45,7 +45,7 @@ declare namespace Cloudflare {
     priority: number;
   }
 
-  interface SrvDnsRecord {
+  export interface SrvDnsRecord {
     type: 'SRV';
     data: {
       name: string;
@@ -68,7 +68,7 @@ declare namespace Cloudflare {
           : DnsRecord)
     & {id: string};
 
-  interface DNSRecords {
+  export interface DNSRecords {
     edit(zone_id: string, id: string, record: DnsRecord): ResponseObjectPromise;
 
     browse<RecordType extends RecordTypes = any>(
@@ -85,7 +85,7 @@ declare namespace Cloudflare {
     add(zone_id: string, record: DnsRecord): ResponseObjectPromise;
   }
 
-  interface DnsRecordsBrowseOptions<RecordType extends RecordTypes> {
+  export interface DnsRecordsBrowseOptions<RecordType extends RecordTypes> {
     page?: number;
     per_page?: number;
     name?: string;
@@ -101,7 +101,7 @@ declare namespace Cloudflare {
     // TODO: support nested filters (for example tag.absent)
   }
 
-  interface DnsRecordsBrowseResponse<RecordType extends RecordTypes> {
+  export interface DnsRecordsBrowseResponse<RecordType extends RecordTypes> {
     result: Array<ExistingDnsRecordByType<RecordType>> | null;
     result_info: {
       page: number;
@@ -114,12 +114,12 @@ declare namespace Cloudflare {
     messages: ResponseMessageObject[];
   }
 
-  interface ResponseMessageObject {
+  export interface ResponseMessageObject {
     code: number;
     message: string;
   }
 
-  interface EnterpriseZoneWorkerScripts {
+  export interface EnterpriseZoneWorkerScripts {
     read(account_id: string, name: string): ResponseObjectPromise;
 
     browse(account_id: string, name: string): ResponseObjectPromise;
@@ -129,7 +129,7 @@ declare namespace Cloudflare {
     del(account_id: string, name: string): ResponseObjectPromise;
   }
 
-  interface EnterpriseZoneWorkersRoutes {
+  export interface EnterpriseZoneWorkersRoutes {
     browse(zone_id: string): ResponseObjectPromise;
 
     del(zone_id: string, id: string): ResponseObjectPromise;
@@ -141,7 +141,7 @@ declare namespace Cloudflare {
     read(zone_id: string, id: string): ResponseObjectPromise;
   }
 
-  interface EnterpriseZoneWorkersKVNamespaces {
+  export interface EnterpriseZoneWorkersKVNamespaces {
     edit(account_id: string, id: string, config: {title: string}): ResponseObjectPromise;
 
     browse(account_id: string): ResponseObjectPromise;
@@ -151,7 +151,7 @@ declare namespace Cloudflare {
     del(account_id: string, id: string): ResponseObjectPromise;
   }
 
-  interface EnterpriseZoneWorkersKV {
+  export interface EnterpriseZoneWorkersKV {
     browse(account_id: string, namespace_id: string): ResponseObjectPromise;
 
     add(account_id: string, namespace_id: string, key_name: string, value: string): ResponseObjectPromise;
@@ -176,11 +176,11 @@ declare namespace Cloudflare {
     delMulti(account_id: string, namespace_id: string, data: string[]): ResponseObjectPromise;
   }
 
-  interface CFIPs {
+  export interface CFIPs {
     browse(): ResponseObjectPromise;
   }
 
-  interface PageRules {
+  export interface PageRules {
     edit(
       id: string,
       page_rule: {
@@ -231,7 +231,7 @@ declare namespace Cloudflare {
     read(id: string): ResponseObjectPromise;
   }
 
-  interface Zones {
+  export interface Zones {
     activationCheck(id: string): ResponseObjectPromise;
 
     del(id: string): ResponseObjectPromise;
@@ -271,7 +271,7 @@ declare namespace Cloudflare {
     browse(): ResponseObjectPromise;
   }
 
-  interface ZoneSettings {
+  export interface ZoneSettings {
     read(id: string, setting: string): ResponseObjectPromise;
 
     edit(id: string, setting: string, value: string | Record<string, unknown>): ResponseObjectPromise;
@@ -281,7 +281,7 @@ declare namespace Cloudflare {
     browse(id: string): ResponseObjectPromise;
   }
 
-  interface ZoneCustomHostNames {
+  export interface ZoneCustomHostNames {
     browse(zone_id: string): ResponseObjectPromise;
 
     read(zone_id: string, id: string): ResponseObjectPromise;
@@ -334,17 +334,17 @@ declare namespace Cloudflare {
     del(zone_id: string, id: string): ResponseObjectPromise;
   }
 
-  interface ZoneWorkers {
+  export interface ZoneWorkers {
     validate(zone_id: string, script: string): ResponseObjectPromise;
   }
 
-  interface ZoneWorkersScript {
+  export interface ZoneWorkersScript {
     read(zone_id: string, script?: string): ResponseObjectPromise;
 
     del(): ResponseObjectPromise;
   }
 
-  interface ZoneWorkersRoutes {
+  export interface ZoneWorkersRoutes {
     browse(zone_id: string): ResponseObjectPromise;
 
     edit(zone_id: string, id: string, config: {pattern: string; script: string}): ResponseObjectPromise;
@@ -356,7 +356,7 @@ declare namespace Cloudflare {
     del(zone_id: string, id: string): ResponseObjectPromise;
   }
 
-  interface User {
+  export interface User {
     read(): ResponseObjectPromise;
 
     edit(user: {
@@ -368,7 +368,7 @@ declare namespace Cloudflare {
     }): ResponseObjectPromise;
   }
 
-  interface Stream {
+  export interface Stream {
     listVideos(accountId: string): ResponseObjectPromise;
 
     videoDetails(accountId: string, id: string): ResponseObjectPromise;
