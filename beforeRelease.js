@@ -59,6 +59,19 @@ const cloudflareInstance = new Cloudflare({
         console.log('Firewall Rules match:', true);
       }
     }
+    let pageRules = await cloudflareInstance.pageRules.browse(
+      zones.result[0].id
+    );
+    console.log(pageRules);
+    if (pageRules.result.length > 0) {
+      let pageRule = await cloudflareInstance.pageRules.read(
+        zones.result[0].id,
+        pageRules.result[0].id
+      );
+      if (pageRules.result[0].id === pageRule.result.id) {
+        console.log('Page Rules match:', true);
+      }
+    }
   } catch (e) {
     // Obsługa błędów w przypadku wystąpienia wyjątku
     console.log('Error:', e);

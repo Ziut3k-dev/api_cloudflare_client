@@ -266,7 +266,7 @@ declare namespace Cloudflare {
 
     del(id: string): ResponseObjectPromise;
 
-    browse(): ResponseObjectPromise;
+    browse(zoneId: string): ResponseObjectPromise;
 
     read(id: string): ResponseObjectPromise;
   }
