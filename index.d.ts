@@ -375,6 +375,12 @@ declare namespace Cloudflare {
 
     deleteVideo(accountId: string, id: string): ResponseObjectPromise;
   }
+  export interface Firewall{
+    browse(zone_id: string): ResponseObjectPromise;
+    read(zone_id: string, id: string): ResponseObjectPromise;
+    edit(zone_id: string, id: string, config: {value: string}): ResponseObjectPromise;
+    add(zone_id: string, config: {value: string}): ResponseObjectPromise;
+  }
 }
 
 declare class Cloudflare {
@@ -392,6 +398,8 @@ declare class Cloudflare {
   zoneWorkersRoutes: Cloudflare.ZoneWorkersRoutes;
   user: Cloudflare.User;
   stream: Cloudflare.Stream;
+  pageRules: Cloudflare.PageRules;
+  firewall: Cloudflare.Firewall;
 
   constructor(auth: Cloudflare.AuthObject);
 }

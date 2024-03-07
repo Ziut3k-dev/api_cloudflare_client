@@ -62,7 +62,7 @@ const cloudflareInstance = new Cloudflare({
     let pageRules = await cloudflareInstance.pageRules.browse(
       zones.result[0].id
     );
-    console.log(pageRules);
+    // console.log(pageRules);
     if (pageRules.result.length > 0) {
       let pageRule = await cloudflareInstance.pageRules.read(
         zones.result[0].id,
@@ -72,6 +72,8 @@ const cloudflareInstance = new Cloudflare({
         console.log('Page Rules match:', true);
       }
     }
+    let ips = await cloudflareInstance.ips.browse();
+    console.log(ips);
   } catch (e) {
     // Obsługa błędów w przypadku wystąpienia wyjątku
     console.log('Error:', e);
