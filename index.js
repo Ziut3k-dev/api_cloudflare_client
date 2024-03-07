@@ -1,46 +1,24 @@
 'use strict';
 
 const Client = require('./lib/Client');
-const proxy = require('./lib/proxy');
-
-const resources = {
-  firewallRule: require('./lib/resources/Firewall'),
-  accessApplications: require('./lib/resources/AccessApplications'),
-  argoTunnels: require('./lib/resources/ArgoTunnels'),
-  dnsRecords: require('./lib/resources/DNSRecords'),
-  enterpriseZoneWorkersScripts: require('./lib/resources/EnterpriseZoneWorkersScripts'),
-  enterpriseZoneWorkersRoutes: require('./lib/resources/EnterpriseZoneWorkersRoutes'),
-  enterpriseZoneWorkersKVNamespaces: require('./lib/resources/EnterpriseZoneWorkersKVNamespaces'),
-  enterpriseZoneWorkersKV: require('./lib/resources/EnterpriseZoneWorkersKV'),
-  ips: require('./lib/resources/IPs'),
-  pageRules: require('./lib/resources/PageRules'),
-  zones: require('./lib/resources/Zones'),
-  zoneSettings: require('./lib/resources/ZoneSettings'),
-  zoneCustomHostNames: require('./lib/resources/ZoneCustomHostNames'),
-  zoneWorkers: require('./lib/resources/ZoneWorkers'),
-  zoneWorkersScript: require('./lib/resources/ZoneWorkersScript'),
-  zoneWorkersRoutes: require('./lib/resources/ZoneWorkersRoutes'),
-  user: require('./lib/resources/User'),
-  userTokens: require('./lib/resources/UserTokens'),
-  stream: require('./lib/resources/Stream'),
-};
-
-const withEnvProxy = function withEnvProxy(opts) {
-  const httpsProxy = process.env.HTTPS_PROXY || process.env.https_proxy;
-  const noProxy = process.env.NO_PROXY || process.env.no_proxy;
-
-  if (httpsProxy) {
-    const agent = proxy.proxyAgent(
-      httpsProxy,
-      noProxy,
-      'https://api.cloudflare.com'
-    );
-
-    if (agent) {
-      opts.agent = agent;
-    }
-  }
-};
+const Zones = require('./lib/resources/Zones');
+const Firewall = require('./lib/resources/Firewall');
+const DNSRecords = require('./lib/resources/DNSRecords');
+const AccessApplications = require('./lib/resources/AccessApplications');
+const ArgoTunnels = require('./lib/resources/ArgoTunnels');
+const CFIPs = require('./lib/resources/CFIPs');
+const PageRules = require('./lib/resources/PageRules');
+const ZoneSettings = require('./lib/resources/ZoneSettings');
+const User = require('./lib/resources/User');
+const UserTokens = require('./lib/resources/UserTokens');
+const ZoneCustomHostNames = require('./lib/resources/ZoneCustomHostNames');
+const ZoneWorkers = require('./lib/resources/ZoneWorkers');
+const ZoneWorkersRoutes = require('./lib/resources/ZoneWorkersRoutes');
+const ZoneWorkersScript = require('./lib/resources/ZoneWorkersScript');
+const EnterpriseZoneWorkersScripts = require('./lib/resources/EnterpriseZoneWorkersScripts');
+const EnterpriseZoneWorkersRoutes = require('./lib/resources/EnterpriseZoneWorkersRoutes');
+const EnterpriseZoneWorkersKVNamespaces = require('./lib/resources/EnterpriseZoneWorkersKVNamespaces');
+const EnterpriseZoneWorkersKV = require('./lib/resources/EnterpriseZoneWorkersKV');
 
 class Cloudflare {
   constructor(auth) {
@@ -49,26 +27,31 @@ class Cloudflare {
       key: auth && auth.key,
       token: auth && auth.token,
     };
-
-    withEnvProxy(opts);
-
-    const client = new Client(opts);
-
-    Object.defineProperty(this, '_client', {
-      value: client,
-      writable: false,
-      enumerable: false,
-      configurable: false,
-    });
-
-    Object.keys(resources).forEach(function(resource) {
-      Object.defineProperty(this, resource, {
-        value: resources[resource](this._client),
-        writable: true,
-        enumerable: false,
-        configurable: true,
-      });
-    }, this);
+    this.client = new Client(opts);
+    this.zones = new Zones(this.client);
+    this.dnsRecords = new DNSRecords(this.client);
+    this.firewall = new Firewall(this.client);
+    this.accessApplications = new AccessApplications(this.client);
+    this.argoTunnels = new ArgoTunnels(this.client);
+    this.ips = new CFIPs(this.client);
+    this.pageRules = new PageRules(this.client);
+    this.zoneSettings = new ZoneSettings(this.client);
+    this.zoneWorkers = new ZoneWorkers(this.client);
+    this.zoneWorkersRoutes = new ZoneWorkersRoutes(this.client);
+    this.zoneWorkersScript = new ZoneWorkersScript(this.client);
+    this.enterpriseZoneWorkersScripts = new EnterpriseZoneWorkersScripts(
+      this.client
+    );
+    this.enterpriseZoneWorkersRoutes = new EnterpriseZoneWorkersRoutes(
+      this.client
+    );
+    this.enterpriseZoneWorkersKVNamespaces = new EnterpriseZoneWorkersKVNamespaces(
+      this.client
+    );
+    this.enterpriseZoneWorkersKV = new EnterpriseZoneWorkersKV(this.client);
+    this.user = new User(this.client);
+    this.userTokens = new UserTokens(this.client);
+    this.zoneCustomHostNames = new ZoneCustomHostNames(this.client);
   }
 }
 
