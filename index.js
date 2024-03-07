@@ -6,6 +6,7 @@ const Firewall = require('./lib/resources/Firewall');
 const DNSRecords = require('./lib/resources/DNSRecords');
 const AccessApplications = require('./lib/resources/AccessApplications');
 const ArgoTunnels = require('./lib/resources/ArgoTunnels');
+const CFIPs = require('./lib/resources/CFIPs');
 
 class Cloudflare {
   constructor(auth) {
@@ -20,6 +21,7 @@ class Cloudflare {
     this.firewall = new Firewall(this.client);
     this.accessApplications = new AccessApplications(this.client);
     this.argoTunnels = new ArgoTunnels(this.client);
+    this.ips = new CFIPs(this.client);
   }
 }
 
