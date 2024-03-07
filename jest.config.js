@@ -13,6 +13,8 @@ const config = {
       {outputDirectory: 'coverage/junit', outputName: 'junit.xml'},
     ],
   ],
+  testRunner: 'jest-circus/runner',
+  testTimeout: 30000,
 };
 
 module.exports = config;
