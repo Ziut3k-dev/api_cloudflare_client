@@ -1,45 +1,4 @@
 declare namespace Cloudflare {
-  interface Zones {
-    activationCheck(id: string): ResponseObjectPromise;
-
-    del(id: string): ResponseObjectPromise;
-
-    add(data: {
-      name: string;
-      account: {id: string};
-      type?: 'full' | 'partial' | undefined;
-    }): ResponseObjectPromise;
-
-    edit(
-      zoneId: string,
-      zone: {
-        name: string;
-        action: {id: string};
-        jump_start?: boolean | undefined;
-        type?: 'full' | 'partial' | undefined;
-      },
-    ): ResponseObjectPromise;
-
-    read(zoneId: string): ZoneResponseObject;
-
-    purgeCache(
-      id: string,
-      params: {
-        files?:
-          | string[]
-          | {url: string; headers: {Origin: string; 'CF-IPCountry': string; 'CF-Device-Type': string}}
-          | undefined;
-        tags?: string[] | undefined;
-        hosts?: string[] | undefined;
-        prefixes?: string[] | undefined;
-      },
-    ): ResponseObjectPromise;
-
-    browse(): ZonesResponseObject;
-
-    browse(zoneId: string): ZoneResponseObject;
-  }
-
   type RecordTypes =
     | 'A'
     | 'AAAA'
@@ -114,8 +73,8 @@ declare namespace Cloudflare {
 
     browse<RecordType extends RecordTypes = any>(
       zone_id: string,
-      options?: {name: string; type: string; content: string},
-    ): Promise<Cloudflare.DnsRecordsBrowseResponse<RecordType>>;
+      options?: DnsRecordsBrowseOptions<RecordType>,
+    ): Promise<DnsRecordsBrowseResponse<RecordType>>;
 
     export(zone_id: string): ResponseObjectPromise;
 
@@ -139,6 +98,7 @@ declare namespace Cloudflare {
     tag_match?: 'any' | 'all';
     search?: string;
     comment?: string;
+    // TODO: support nested filters (for example tag.absent)
   }
 
   interface DnsRecordsBrowseResponse<RecordType extends RecordTypes> {
@@ -194,7 +154,7 @@ declare namespace Cloudflare {
   interface EnterpriseZoneWorkersKV {
     browse(account_id: string, namespace_id: string): ResponseObjectPromise;
 
-    add(account_id: string, namespace_id: string, key_name: string): Cloudflare.ResponseObjectPromise;
+    add(account_id: string, namespace_id: string, key_name: string, value: string): ResponseObjectPromise;
 
     read(account_id: string, namespace_id: string, key_name: string): ResponseObjectPromise;
 
@@ -266,11 +226,50 @@ declare namespace Cloudflare {
 
     del(id: string): ResponseObjectPromise;
 
-    browse(zoneId: string): ResponseObjectPromise;
+    browse(): ResponseObjectPromise;
 
     read(id: string): ResponseObjectPromise;
   }
 
+  interface Zones {
+    activationCheck(id: string): ResponseObjectPromise;
+
+    del(id: string): ResponseObjectPromise;
+
+    add(zone: {
+      name: string;
+      action: {id: string};
+      jump_start?: boolean | undefined;
+      type?: 'full' | 'partial' | undefined;
+    }): ResponseObjectPromise;
+
+    edit(
+      id: string,
+      zone: {
+        name: string;
+        action: {id: string};
+        jump_start?: boolean | undefined;
+        type?: 'full' | 'partial' | undefined;
+      },
+    ): ResponseObjectPromise;
+
+    read(id: string): ResponseObjectPromise;
+
+    purgeCache(
+      id: string,
+      params: {
+        files?:
+          | string[]
+          | {url: string; headers: {Origin: string; 'CF-IPCountry': string; 'CF-Device-Type': string}}
+          | undefined;
+        tags?: string[] | undefined;
+        hosts?: string[] | undefined;
+        prefixes?: string[] | undefined;
+      },
+    ): ResponseObjectPromise;
+
+    browse(): ResponseObjectPromise;
+  }
 
   interface ZoneSettings {
     read(id: string, setting: string): ResponseObjectPromise;
@@ -360,7 +359,13 @@ declare namespace Cloudflare {
   interface User {
     read(): ResponseObjectPromise;
 
-    edit(user: string): Cloudflare.ResponseObjectPromise;
+    edit(user: {
+      first_name: string;
+      last_name: string;
+      telephone: string;
+      country: string;
+      zipcode: string;
+    }): ResponseObjectPromise;
   }
 
   interface Stream {
@@ -369,122 +374,6 @@ declare namespace Cloudflare {
     videoDetails(accountId: string, id: string): ResponseObjectPromise;
 
     deleteVideo(accountId: string, id: string): ResponseObjectPromise;
-  }
-
-  interface Firewall {
-    browse(zone_id: string): ResponseObjectPromise;
-
-    // add(zone_id: string, config: { mode: string; configuration: object }): ResponseObjectPromise;
-    // edit(zone_id: string, id: string, config: { mode: string; configuration: object }): ResponseObjectPromise;
-    del(zone_id: string, id: string): ResponseObjectPromise;
-
-    read(zone_id: string, id: string): ResponseObjectPromise;
-  }
-
-  interface AccessApplications {
-    browse(): ResponseObjectPromise;
-
-    // add(config: { name: string; domain: string; type: string }): ResponseObjectPromise;
-    // edit(id: string, config: { name: string; domain: string; type: string }): ResponseObjectPromise;
-    del(id: string): ResponseObjectPromise;
-
-    read(id: string): ResponseObjectPromise;
-  }
-
-  interface ZonesResponseObject {
-    result: Array<Zone> | null;
-    result_info: {
-      page: number;
-      per_page: number;
-      count: number;
-      total_count: number;
-    };
-    success: boolean;
-    errors: ResponseMessageObject[];
-    messages: ResponseMessageObject[];
-
-  }
-
-  interface ZoneResponseObject {
-    result: Zone;
-    result_info: {
-      page: number;
-      per_page: number;
-      count: number;
-      total_count: number;
-    };
-    success: boolean;
-    errors: ResponseMessageObject[];
-    messages: ResponseMessageObject[];
-  }
-
-  interface Zone {
-    id: string;
-    name: string;
-    development_mode: number;
-    original_name_servers: string[];
-    original_registrar: string;
-    original_dnshost: string;
-    created_on: string;
-    modified_on: string;
-    activated_on: string;
-    meta: {
-      step: number;
-      wildcard_proxiable: boolean;
-      custom_certificate_quota: number;
-      page_rule_quota: number;
-      zone_type: string;
-      hosted_cnames: number;
-      hosted_mx: number;
-      hosted_txt: number;
-      owner: {
-        id: string;
-        email: string;
-        type: string;
-      };
-      permissions: string[];
-      plan: {
-        id: string;
-        name: string;
-        price: number;
-        currency: string;
-        frequency: string;
-        legacy_id: string;
-        is_subscribed: boolean;
-        can_subscribe: boolean;
-      };
-    };
-    name_servers: string[];
-    owner: {
-      id: string;
-      email: string;
-      type: string;
-    };
-    account: {
-      id: string;
-      name: string;
-    };
-    permissions: string[];
-    plan: {
-      id: string;
-      name: string;
-      price: number;
-      currency: string;
-      frequency: string;
-      legacy_id: string;
-      is_subscribed: boolean;
-      can_subscribe: boolean;
-    };
-    status: string;
-    paused: boolean;
-    type: string;
-    host: {
-      name: string;
-      original_name: string;
-      original_ip: string;
-    };
-    cloudflare_nameservers: string[];
-
   }
 }
 
@@ -503,11 +392,8 @@ declare class Cloudflare {
   zoneWorkersRoutes: Cloudflare.ZoneWorkersRoutes;
   user: Cloudflare.User;
   stream: Cloudflare.Stream;
-  pageRules: Cloudflare.PageRules;
-  firewall: Cloudflare.Firewall;
-  accessApplications: Cloudflare.AccessApplications;
 
   constructor(auth: Cloudflare.AuthObject);
 }
 
-export default Cloudflare;
+export = Cloudflare;
