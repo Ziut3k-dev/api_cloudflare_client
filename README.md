@@ -1,5 +1,4 @@
 # Cloudflare Node.js bindings
-Forked from [cloudflare/node-cloudflare](https://github.com/cloudflare/node-cloudflare)
 
 [![Stability Stable][badge-stability]][badge-stability-url]
 [![Coveralls][badge-coveralls]][badge-coveralls-url]
@@ -10,18 +9,26 @@ Forked from [cloudflare/node-cloudflare](https://github.com/cloudflare/node-clou
 [//]: # ([![Travis CI][badge-travis]][badge-travis-url])
 
 
-
-
 [badge-stability]: https://img.shields.io/badge/stability-stable-green.svg?style=flat-square
+
 [badge-stability-url]: https://github.com/dominictarr/stability/blob/4d649a5b3af8444720929a50254dfbb071ce27e7/levels.json#L8-L9
+
 [badge-npm]: https://img.shields.io/npm/v/api_cloudflare_client.svg?style=flat-square
+
 [badge-npm-downloads]: https://img.shields.io/npm/dm/api_cloudflare_client.svg?style=flat-square
+
 [badge-npm-url]: https://www.npmjs.com/package/api_cloudflare_client
+
 [badge-travis]: https://img.shields.io/travis/ziut3k-dev/api_cloudflare_client/master.svg?style=flat-square
+
 [badge-travis-url]: https://travis-ci.org/ziut3k-dev/api_cloudflare_client
+
 [badge-coveralls]: https://img.shields.io/coveralls/github/ziut3k-dev/api_cloudflare_client/master.svg?style=flat-square
+
 [badge-coveralls-url]: https://coveralls.io/github/Ziut3k-dev/api_cloudflare_client
+
 [badge-libraries]: https://img.shields.io/librariesio/github/Ziut3k-dev/api_cloudflare_client.svg?style=flat-square
+
 [badge-libraries-url]: https://libraries.io/github/Ziut3k-dev/api_cloudflare_client
 
 [Cloudflare v4 API][cf-api] bindings for Node.js, providing a sourdough
@@ -41,7 +48,7 @@ Node.js v12 and greater are supported.
 
 ### API Keys
 
-Set your account email address and API key.  The API key can be found on
+Set your account email address and API key. The API key can be found on
 the [My Profile -> API Tokens][api-tokens] page in the Cloudflare dashboard.
 
 [api-tokens]: https://dash.cloudflare.com/profile/api-tokens
@@ -77,7 +84,7 @@ Every resource method returns a promise, which can be chained or used
 with async/await.
 
 ```javascript
-cf.zones.read('023e105f4ecef8ad9ca31a8372d0c353').then(function (resp) {
+cf.zones.read('023e105f4ecef8ad9ca31a8372d0c353').then(function(resp) {
   return resp.result.status;
 });
 
