@@ -1,4 +1,45 @@
 declare namespace Cloudflare {
+  interface Zones {
+    activationCheck(id: string): ResponseObjectPromise;
+
+    del(id: string): ResponseObjectPromise;
+
+    add(data: {
+      name: string;
+      account: {id: string};
+      type?: 'full' | 'partial' | undefined;
+    }): ResponseObjectPromise;
+
+    edit(
+      zoneId: string,
+      zone: {
+        name: string;
+        action: {id: string};
+        jump_start?: boolean | undefined;
+        type?: 'full' | 'partial' | undefined;
+      },
+    ): ResponseObjectPromise;
+
+    read(zoneId: string): ZoneResponseObject;
+
+    purgeCache(
+      id: string,
+      params: {
+        files?:
+          | string[]
+          | {url: string; headers: {Origin: string; 'CF-IPCountry': string; 'CF-Device-Type': string}}
+          | undefined;
+        tags?: string[] | undefined;
+        hosts?: string[] | undefined;
+        prefixes?: string[] | undefined;
+      },
+    ): ResponseObjectPromise;
+
+    browse(): ZonesResponseObject;
+
+    browse(zoneId: string): ZoneResponseObject;
+  }
+
   type RecordTypes =
     | 'A'
     | 'AAAA'
@@ -230,47 +271,6 @@ declare namespace Cloudflare {
     read(id: string): ResponseObjectPromise;
   }
 
-  interface Zones {
-    activationCheck(id: string): ResponseObjectPromise;
-
-    del(id: string): ResponseObjectPromise;
-
-    add(zone: {
-      name: string;
-      action: {id: string};
-      jump_start?: boolean | undefined;
-      type?: 'full' | 'partial' | undefined;
-    }): ResponseObjectPromise;
-
-    edit(
-      zoneId: string,
-      zone: {
-        name: string;
-        action: {id: string};
-        jump_start?: boolean | undefined;
-        type?: 'full' | 'partial' | undefined;
-      },
-    ): ResponseObjectPromise;
-
-    read(zoneId: string): ZoneResponseObject;
-
-    purgeCache(
-      id: string,
-      params: {
-        files?:
-          | string[]
-          | {url: string; headers: {Origin: string; 'CF-IPCountry': string; 'CF-Device-Type': string}}
-          | undefined;
-        tags?: string[] | undefined;
-        hosts?: string[] | undefined;
-        prefixes?: string[] | undefined;
-      },
-    ): ResponseObjectPromise;
-
-    browse(): ZonesResponseObject;
-
-    browse(zoneId: string): ZoneResponseObject;
-  }
 
   interface ZoneSettings {
     read(id: string, setting: string): ResponseObjectPromise;
