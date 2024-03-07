@@ -15,7 +15,15 @@ const cloudflareInstance = new Cloudflare({
     let dnsRecord = await cloudflareInstance.dnsRecords.browse(
       zones.result[0].id
     );
-    console.log(dnsRecord);
+    if (dnsRecord.result.length > 0) {
+      let dnsRecord2 = await cloudflareInstance.dnsRecords.read(
+        zones.result[0].id,
+        dnsRecord.result[0].id
+      );
+      if (dnsRecord.result[0].id === dnsRecord2.result.id) {
+        console.log(true);
+      }
+    }
     // console.log(zone);
     // console.log(zones);
   } catch (e) {
