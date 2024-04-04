@@ -414,11 +414,11 @@ declare namespace Cloudflare {
   };
   type FirewallRuleAction = 'block' | 'challenge' | 'js_challenge' | 'allow';
   type FirewallBody = {
-    priority: number;
+    priority?: number;
     filter: FirewallFilter;
     action: FirewallRuleAction;
     description?: string;
-    paused: boolean;
+    paused?: boolean;
   };
   export interface Firewall {
     browse(zone_id: string): ResponseCloudflareObject<FirewallRule>;
