@@ -420,6 +420,8 @@ declare class Cloudflare {
   stream: Cloudflare.Stream;
   pageRules: Cloudflare.PageRules;
   firewall: Cloudflare.Firewall;
+  constructor(auth: Cloudflare.AuthObject);
+
 }
 
-export default Cloudflare;
+export = Cloudflare;
