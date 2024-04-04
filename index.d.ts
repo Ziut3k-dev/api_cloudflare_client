@@ -468,7 +468,7 @@ declare namespace Cloudflare {
     description: string;
     kind: RulesetKind;
     name: string;
-    phase: RulesetPhase;
+    phase?: RulesetPhase;
     rules: {
       action: 'allow' | 'block' | 'log' | 'skip';
       action_parameters?: {
