@@ -21,8 +21,8 @@ declare namespace Cloudflare {
     | 'URI';
 
   type ResponseObjectPromise = Promise<object>;
-  type ResponseCloudflareObject = Promise<{
-    result: object[] | null;
+  type ResponseCloudflareObject<T> = Promise<{
+    result: T[] | null;
     result_info: {
       page: number;
       per_page: number;
@@ -285,7 +285,7 @@ declare namespace Cloudflare {
       zoneId?: string | null,
       per_page?: number,
       page?: number,
-    ): ResponseCloudflareObject;
+    ): ResponseCloudflareObject<Object>;
   }
 
   export interface ZoneSettings {
@@ -393,8 +393,24 @@ declare namespace Cloudflare {
     deleteVideo(accountId: string, id: string): ResponseObjectPromise;
   }
 
+  type FirewallRule = {
+    id: string;
+    pasuse: boolean;
+    description?: string;
+    action: string;
+    ref: string;
+    created_on: string;
+    modified_on: string;
+    filter: {
+      id: string;
+      expression: string;
+      paused: boolean;
+      description?: string;
+      ref: string;
+    };
+  };
   export interface Firewall {
-    browse(zone_id: string): ResponseCloudflareObject;
+    browse(zone_id: string): ResponseCloudflareObject<FirewallRule>;
 
     read(zone_id: string, id: string): ResponseObjectPromise;
 
