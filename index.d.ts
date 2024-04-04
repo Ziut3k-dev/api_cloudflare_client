@@ -427,7 +427,7 @@ declare namespace Cloudflare {
 
     edit(zone_id: string, id: string, config: {value: string}): ResponseObjectPromise;
 
-    add(zone_id: string, config: {value: string},zone:FirewallBody[]): ResponseObjectPromise;
+    add(zone_id: string, zone:FirewallBody[],config?: {value: string}): ResponseObjectPromise;
 
     del(zone_id: string, id: string): ResponseCloudflareObject<FirewallRule>;
   }
