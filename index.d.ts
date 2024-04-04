@@ -77,9 +77,9 @@ declare namespace Cloudflare {
   type ExistingDnsRecordByType<RecordType extends RecordTypes> =
     & (RecordType extends 'MX' | 'URI' ? DnsRecordWithPriority
       : RecordType extends 'SRV' ? SrvDnsRecord
-        : RecordType extends Exclude<RecordTypes, 'MX' | 'SRV' | 'URI'> ? DnsRecordWithoutPriority
-          : DnsRecord)
-    & {id: string};
+      : RecordType extends Exclude<RecordTypes, 'MX' | 'SRV' | 'URI'> ? DnsRecordWithoutPriority
+      : DnsRecord)
+    & { id: string };
 
   export interface DNSRecords {
     edit(zone_id: string, id: string, record: DnsRecord): ResponseObjectPromise;
@@ -147,19 +147,19 @@ declare namespace Cloudflare {
 
     del(zone_id: string, id: string): ResponseObjectPromise;
 
-    add(zone_id: string, config: {pattern: string; script: string}): ResponseObjectPromise;
+    add(zone_id: string, config: { pattern: string; script: string }): ResponseObjectPromise;
 
-    edit(zone_id: string, id: string, config: {pattern: string; script: string}): ResponseObjectPromise;
+    edit(zone_id: string, id: string, config: { pattern: string; script: string }): ResponseObjectPromise;
 
     read(zone_id: string, id: string): ResponseObjectPromise;
   }
 
   export interface EnterpriseZoneWorkersKVNamespaces {
-    edit(account_id: string, id: string, config: {title: string}): ResponseObjectPromise;
+    edit(account_id: string, id: string, config: { title: string }): ResponseObjectPromise;
 
     browse(account_id: string): ResponseObjectPromise;
 
-    add(account_id: string, config: {title: string}): ResponseObjectPromise;
+    add(account_id: string, config: { title: string }): ResponseObjectPromise;
 
     del(account_id: string, id: string): ResponseObjectPromise;
   }
@@ -251,7 +251,7 @@ declare namespace Cloudflare {
 
     add(zone: {
       name: string;
-      action: {id: string};
+      action: { id: string };
       jump_start?: boolean | undefined;
       type?: 'full' | 'partial' | undefined;
     }): ResponseObjectPromise;
@@ -260,7 +260,7 @@ declare namespace Cloudflare {
       id: string,
       zone: {
         name: string;
-        action: {id: string};
+        action: { id: string };
         jump_start?: boolean | undefined;
         type?: 'full' | 'partial' | undefined;
       },
@@ -272,9 +272,9 @@ declare namespace Cloudflare {
       id: string,
       params: {
         files?:
-          | string[]
-          | {url: string; headers: {Origin: string; 'CF-IPCountry': string; 'CF-Device-Type': string}}
-          | undefined;
+        | string[]
+        | { url: string; headers: { Origin: string; 'CF-IPCountry': string; 'CF-Device-Type': string } }
+        | undefined;
         tags?: string[] | undefined;
         hosts?: string[] | undefined;
         prefixes?: string[] | undefined;
@@ -364,11 +364,11 @@ declare namespace Cloudflare {
   export interface ZoneWorkersRoutes {
     browse(zone_id: string): ResponseObjectPromise;
 
-    edit(zone_id: string, id: string, config: {pattern: string; script: string}): ResponseObjectPromise;
+    edit(zone_id: string, id: string, config: { pattern: string; script: string }): ResponseObjectPromise;
 
     read(zone_id: string, id: string): ResponseObjectPromise;
 
-    add(zone_id: string, config: {pattern: string; script: string}): ResponseObjectPromise;
+    add(zone_id: string, config: { pattern: string; script: string }): ResponseObjectPromise;
 
     del(zone_id: string, id: string): ResponseObjectPromise;
   }
@@ -400,7 +400,7 @@ declare namespace Cloudflare {
       description?: string;
       ref?: string;
     };
-  
+
   type FirewallRule = {
     id: string;
     pasuse: boolean;
@@ -425,30 +425,76 @@ declare namespace Cloudflare {
 
     read(zone_id: string, id: string): ResponseObjectPromise;
 
-    edit(zone_id: string, id: string, config: {value: string}): ResponseObjectPromise;
+    edit(zone_id: string, id: string, config: { value: string }): ResponseObjectPromise;
 
-    add(zone_id: string,rules:FirewallBody[]): ResponseObjectPromise;
+    add(zone_id: string, rules: FirewallBody[]): ResponseObjectPromise;
 
     del(zone_id: string, id: string): ResponseCloudflareObject<FirewallRule>;
   }
   type Ruleset = {
-    id: string;
-    name: string;
     description: string;
-    source?: string;
-    version: string;
-    kind: string;
+    id: string;
+    kind: RulesetKind;
     last_updated: string;
-    phase: string;
+    name: string;
+    phase: RulesetPhase;
+    version: string;
   };
+  type RulesetKind = 'managed' | 'user' | 'zone' | 'custom';
+  type RulesetPhase = 'ddos_l4' |
+    'ddos_l7' |
+    'http_config_settings' |
+    'http_custom_errors' |
+    'http_log_custom_fields' |
+    'http_ratelimit' |
+    'http_request_cache_settings' |
+    'http_request_dynamic_redirect' |
+    'http_request_firewall_custom' |
+    'http_request_firewall_managed' |
+    'http_request_late_transform' |
+    'http_request_origin' |
+    'http_request_redirect' |
+    'http_request_sanitize' |
+    'http_request_sbfm' |
+    'http_request_select_configuration' |
+    'http_request_transform' |
+    'http_response_compression' |
+    'http_response_firewall_managed' |
+    'http_response_headers_transform' |
+    'magic_transit' |
+    'magic_transit_ids_managed' |
+    'magic_transit_managed';
+  type RulesetBody = {
+    description: string;
+    kind: RulesetKind;
+    name: string;
+    phase: RulesetPhase;
+    rules: {
+      action: 'allow' | 'block' | 'log' | 'skip';
+      action_parameters?: {
+        response?: {
+          status_code?: number;
+          content_type?: string;
+          body?: string;
+        }
+        description?: string;
+        enabled?: boolean;
+        expression: string;
+        loggings?: {
+          enabled: boolean;
+        }[];
+        ref?: string;
+      };
+    };
+  }
   export interface Rulesets {
     browse(zone_id: string): ResponseCloudflareObject<Ruleset>;
 
-    read(zone_id: string, id: string): ResponseObjectPromise;
+    read(zone_id: string, ruleId: string): ResponseCloudflareObject<Ruleset>;
 
-    edit(zone_id: string, id: string, config: {value: string}): ResponseObjectPromise;
+    edit(zone_id: string, ruleId: string, rules: RulesetBody): ResponseObjectPromise;
 
-    add(zone_id: string,rules:FirewallBody[]): ResponseObjectPromise;
+    add(zone_id: string, ruleId: string, rules: RulesetBody): ResponseObjectPromise;
 
     del(zone_id: string, id: string): ResponseObjectPromise;
   }
