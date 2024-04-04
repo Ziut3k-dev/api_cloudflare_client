@@ -422,4 +422,4 @@ declare class Cloudflare {
   firewall: Cloudflare.Firewall;
 }
 
-export default Cloudflare;
+export = Cloudflare;
