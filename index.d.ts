@@ -477,6 +477,7 @@ declare namespace Cloudflare {
           content_type?: string;
           body?: string;
         }
+      };
         description?: string;
         enabled?: boolean;
         expression: string;
@@ -484,7 +485,6 @@ declare namespace Cloudflare {
           enabled: boolean;
         }[];
         ref?: string;
-      };
     };
   }
   export interface Rulesets {
