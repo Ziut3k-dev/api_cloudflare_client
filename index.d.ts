@@ -517,6 +517,7 @@ declare class Cloudflare {
   stream: Cloudflare.Stream;
   pageRules: Cloudflare.PageRules;
   firewall: Cloudflare.Firewall;
+  rulesets: Cloudflare.Rulesets;
   constructor(auth: Cloudflare.AuthObject);
 
 }
