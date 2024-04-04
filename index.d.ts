@@ -392,22 +392,31 @@ declare namespace Cloudflare {
 
     deleteVideo(accountId: string, id: string): ResponseObjectPromise;
   }
-
+  type FirewallFilter =
+    {
+      id?: string;
+      expression: string;
+      paused: boolean;
+      description?: string;
+      ref?: string;
+    };
+  
   type FirewallRule = {
     id: string;
     pasuse: boolean;
     description?: string;
-    action: string;
+    action: FirewallRuleAction;
     ref: string;
     created_on: string;
     modified_on: string;
-    filter: {
-      id: string;
-      expression: string;
-      paused: boolean;
-      description?: string;
-      ref: string;
-    };
+    filter: FirewallFilter;
+  };
+  type FirewallRuleAction = 'block' | 'challenge' | 'js_challenge' | 'allow';
+  type FirewallBody = {
+    filter: FirewallFilter;
+    action: FirewallRuleAction;
+    description?: string;
+    paused: boolean;
   };
   export interface Firewall {
     browse(zone_id: string): ResponseCloudflareObject<FirewallRule>;
@@ -416,7 +425,9 @@ declare namespace Cloudflare {
 
     edit(zone_id: string, id: string, config: {value: string}): ResponseObjectPromise;
 
-    add(zone_id: string, config: {value: string}): ResponseObjectPromise;
+    add(zone_id: string, config: {value: string},zone:FirewallBody[]): ResponseObjectPromise;
+
+    del(zone_id: string, id: string): ResponseCloudflareObject<FirewallRule>;
   }
 }
 
