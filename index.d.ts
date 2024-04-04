@@ -28,6 +28,7 @@ declare namespace Cloudflare {
       per_page: number;
       count: number;
       total_count: number;
+      total_pages: number;
     };
     success: boolean;
     errors: ResponseMessageObject[];
