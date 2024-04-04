@@ -268,7 +268,11 @@ declare namespace Cloudflare {
       },
     ): ResponseObjectPromise;
 
-    browse(): ResponseObjectPromise;
+    browse(
+      zoneId?: string | null,
+      per_page?: number,
+      page?: number,
+    ): ResponseObjectPromise;
   }
 
   export interface ZoneSettings {
@@ -375,10 +379,14 @@ declare namespace Cloudflare {
 
     deleteVideo(accountId: string, id: string): ResponseObjectPromise;
   }
-  export interface Firewall{
+
+  export interface Firewall {
     browse(zone_id: string): ResponseObjectPromise;
+
     read(zone_id: string, id: string): ResponseObjectPromise;
+
     edit(zone_id: string, id: string, config: {value: string}): ResponseObjectPromise;
+
     add(zone_id: string, config: {value: string}): ResponseObjectPromise;
   }
 }
@@ -400,8 +408,4 @@ declare class Cloudflare {
   stream: Cloudflare.Stream;
   pageRules: Cloudflare.PageRules;
   firewall: Cloudflare.Firewall;
-
-  constructor(auth: Cloudflare.AuthObject);
 }
-
-export = Cloudflare;

@@ -54,10 +54,30 @@ the [My Profile -> API Tokens][api-tokens] page in the Cloudflare dashboard.
 [api-tokens]: https://dash.cloudflare.com/profile/api-tokens
 
 ```javascript
-var cf = require('api_cloudflare_client')({
+const cfInstance = require('api_cloudflare_client')({
   email: 'you@example.com',
   key: 'your Cloudflare API key'
 });
+```
+
+```typescript
+import Cloudflare from 'api_cloudflare_client'
+
+
+export default class CloudflareController {
+  constructor(private config: ConfigurationsController) {
+    this.config = config
+  }
+
+  async cloudflareInstance(): Promise<Cloudflare> {
+    const email = await this.config.get('cf.X-Auth-Email')
+    const key = await this.config.get('cf.X-Auth-Key')
+    // console.log(email, key)
+    if (typeof key !== 'string' || typeof email !== 'string')
+      throw new Error('Cloudflare credentials not found')
+    return new Cloudflare({email: email, key: key})
+  }
+}
 ```
 
 ### API Tokens (BETA)
@@ -66,15 +86,16 @@ Create your token on the [My Profile -> API Tokens][api-tokens] page in the Clou
 
 [api-tokens]: https://dash.cloudflare.com/profile/api-tokens
 
-```javascript
-var cf = require('api_cloudflare_client')({
+```
+javascript
+const cfInstance = require('api_cloudflare_client')({
   token: 'your Cloudflare API token'
 });
 ```
 
 ## API Overview
 
-Every resource is accessed via your `cf` instance:
+Every resource is accessed via your `cfInstance` instance:
 
 ```javascript
 // cf.{ RESOURCE_NAME }.{ METHOD_NAME }
@@ -84,18 +105,4 @@ Every resource method returns a promise, which can be chained or used
 with async/await.
 
 ```javascript
-cf.zones.read('023e105f4ecef8ad9ca31a8372d0c353').then(function(resp) {
-  return resp.result.status;
-});
-
-
-// where supported
-async function getZoneStatus(id) {
-  var resp = await cf.zones.read('023e105f4ecef8ad9ca31a8372d0c353');
-  return resp.result.status;
-}
-```
-
-### Documentation
-
-* [Generated JSDoc](https://cloudflare.github.io/node-cloudflare)
+cfInstance.zones.read('023e105f4ecef8ad9ca31a8372d0c353'

@@ -11,7 +11,8 @@ const cloudflareInstance = new Cloudflare({
 (async () => {
   try {
     // Pobieranie listy wszystkich stref (zones)
-    const zones = await cloudflareInstance.zones.browse();
+    const zones = await cloudflareInstance.zones.browse(null, 50);
+    // console.log(zones);
 
     // Pobieranie informacji o konkretnej strefie (zone) na podstawie jej ID
     let zone = await cloudflareInstance.zones.browse(zones.result[0].id);

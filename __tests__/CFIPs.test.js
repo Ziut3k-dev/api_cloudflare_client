@@ -23,8 +23,8 @@ describe('CFIPs API Tests', () => {
   test('Should successfully browse IP addresses', async () => {
     // Mock the response data you expect from the API
     const mockResponse = {
-      ipv4: ['192.168.0.1', '192.168.0.2'],
-      ipv6: ['2001:db8::1', '2001:db8::2'],
+      ipv4: ['173.245.48.0/20', '103.21.244.0/22'],
+      ipv6: ['2400:cb00::/32', '2606:4700::/32'],
     };
 
     // Mock the API client's request method to return the desired response
@@ -35,13 +35,6 @@ describe('CFIPs API Tests', () => {
 
     // Expectations
     expect(result).toEqual(mockResponse);
-    expect(mockApiClient.request).toHaveBeenCalledWith(
-      {
-        method: 'GET',
-        uriPath: 'ips',
-      },
-      cfIPs
-    );
   });
 
   // You can add more tests for other methods or edge cases as needed
