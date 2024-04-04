@@ -407,12 +407,14 @@ declare namespace Cloudflare {
     description?: string;
     action: FirewallRuleAction;
     ref: string;
+    priority: number;
     created_on: string;
     modified_on: string;
     filter: FirewallFilter;
   };
   type FirewallRuleAction = 'block' | 'challenge' | 'js_challenge' | 'allow';
   type FirewallBody = {
+    priority: number;
     filter: FirewallFilter;
     action: FirewallRuleAction;
     description?: string;
