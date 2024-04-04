@@ -21,8 +21,8 @@ declare namespace Cloudflare {
     | 'URI';
 
   type ResponseObjectPromise = Promise<object>;
-  type ResponseCloudflareObject = {
-    result: object | null;
+  type ResponseCloudflareObject = Promise<{
+    result: object[] | null;
     result_info: {
       page: number;
       per_page: number;
@@ -32,7 +32,7 @@ declare namespace Cloudflare {
     success: boolean;
     errors: ResponseMessageObject[];
     messages: ResponseMessageObject[];
-  }
+  }>;
 
   export interface AuthObject {
     email?: string | undefined;
@@ -284,7 +284,7 @@ declare namespace Cloudflare {
       zoneId?: string | null,
       per_page?: number,
       page?: number,
-    ): Promise<ResponseCloudflareObject>;
+    ): ResponseCloudflareObject;
   }
 
   export interface ZoneSettings {
@@ -393,7 +393,7 @@ declare namespace Cloudflare {
   }
 
   export interface Firewall {
-    browse(zone_id: string): ResponseObjectPromise;
+    browse(zone_id: string): ResponseCloudflareObject;
 
     read(zone_id: string, id: string): ResponseObjectPromise;
 
