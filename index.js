@@ -19,7 +19,7 @@ const EnterpriseZoneWorkersScripts = require('./lib/resources/EnterpriseZoneWork
 const EnterpriseZoneWorkersRoutes = require('./lib/resources/EnterpriseZoneWorkersRoutes');
 const EnterpriseZoneWorkersKVNamespaces = require('./lib/resources/EnterpriseZoneWorkersKVNamespaces');
 const EnterpriseZoneWorkersKV = require('./lib/resources/EnterpriseZoneWorkersKV');
-
+const Rulesets = require('./lib/resources/Rulesets');
 class Cloudflare {
   constructor(auth) {
     const opts = {
@@ -52,6 +52,7 @@ class Cloudflare {
     this.user = new User(this.client);
     this.userTokens = new UserTokens(this.client);
     this.zoneCustomHostNames = new ZoneCustomHostNames(this.client);
+    this.rulesets = new Rulesets(this.client);
   }
 }
 
