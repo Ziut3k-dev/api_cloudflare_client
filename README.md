@@ -1,7 +1,7 @@
 # Cloudflare Node.js bindings
 
 [![Stability Stable][badge-stability]][badge-stability-url]
-[![Coveralls][badge-coveralls]][badge-coveralls-url]
+[![Coverage Status](https://coveralls.io/repos/github/Ziut3k-dev/api_cloudflare_client/badge.svg?branch=master)](https://coveralls.io/github/Ziut3k-dev/api_cloudflare_client?branch=master)
 [![NPM version][badge-npm]][badge-npm-url]
 [![Libraries.io Dependencies][badge-libraries]][badge-libraries-url]
 [![NPM downloads][badge-npm-downloads]][badge-npm-downloads]
@@ -23,9 +23,6 @@
 
 [badge-travis-url]: https://travis-ci.org/ziut3k-dev/api_cloudflare_client
 
-[badge-coveralls]: https://img.shields.io/coveralls/github/ziut3k-dev/api_cloudflare_client/master.svg?style=flat-square
-
-[badge-coveralls-url]: https://coveralls.io/github/Ziut3k-dev/api_cloudflare_client
 
 [badge-libraries]: https://img.shields.io/librariesio/github/Ziut3k-dev/api_cloudflare_client.svg?style=flat-square
 
