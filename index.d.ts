@@ -431,6 +431,27 @@ declare namespace Cloudflare {
 
     del(zone_id: string, id: string): ResponseCloudflareObject<FirewallRule>;
   }
+  type Ruleset = {
+    id: string;
+    name: string;
+    description: string;
+    source?: string;
+    version: string;
+    kind: string;
+    last_updated: string;
+    phase: string;
+  };
+  export interface Rulesets {
+    browse(zone_id: string): ResponseCloudflareObject<Ruleset>;
+
+    read(zone_id: string, id: string): ResponseObjectPromise;
+
+    edit(zone_id: string, id: string, config: {value: string}): ResponseObjectPromise;
+
+    add(zone_id: string,rules:FirewallBody[]): ResponseObjectPromise;
+
+    del(zone_id: string, id: string): ResponseObjectPromise;
+  }
 }
 
 declare class Cloudflare {
