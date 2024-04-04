@@ -465,27 +465,21 @@ declare namespace Cloudflare {
     'magic_transit_ids_managed' |
     'magic_transit_managed';
   type RulesetBody = {
-    description: string;
-    kind: RulesetKind;
-    name: string;
-    phase?: RulesetPhase;
-    rules: {
-      action: 'allow' | 'block' | 'log' | 'skip';
-      action_parameters?: {
-        response?: {
-          status_code?: number;
-          content_type?: string;
-          body?: string;
-        }
-      };
-        description?: string;
-        enabled?: boolean;
-        expression: string;
-        loggings?: {
-          enabled: boolean;
-        }[];
-        ref?: string;
+    action: 'allow' | 'block' | 'log' | 'skip';
+    action_parameters?: {
+      response?: {
+        status_code?: number;
+        content_type?: string;
+        body?: string;
+      }
     };
+    description?: string;
+    enabled?: boolean;
+    expression: string;
+    logging?: {
+      enabled: boolean;
+    };
+    ref?: string;
   }
   export interface Rulesets {
     browse(zone_id: string): ResponseCloudflareObject<Ruleset>;
