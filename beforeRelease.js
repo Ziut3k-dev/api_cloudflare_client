@@ -13,7 +13,34 @@ const cloudflareInstance = new Cloudflare({
     // Pobieranie listy wszystkich stref (zones)
     const zones = await cloudflareInstance.zones.browse(null, 50);
     console.log(zones.result_info);
-
+    const allZones = [];
+    let page = 1;
+    let perPage = 50;
+    let total = zones.result_info.total_pages;
+    while (page <= total) {
+      let zones = await cloudflareInstance.zones.browse(null, perPage, page);
+      allZones.push(...zones.result);
+      page++;
+    }
+    console.log(allZones.length);
+    let zonesLength = allZones.length;
+    while (zonesLength--) {
+      let zoneId = allZones[zonesLength].id;
+      let zoneFilters = await cloudflareInstance.filters.browse(zoneId);
+      zoneFilters.result.forEach(async filter => {
+        if (
+          filter.ref === 'REW-2' ||
+          filter.ref === 'REW-1' ||
+          filter.ref === 'REW-3' ||
+          filter.paused == true
+        ) {
+          console.log(await cloudflareInstance.filters.del(zoneId, filter.id));
+        } else {
+          console.log(filter);
+        }
+      });
+      // filters.push(...zoneFilters.result);
+    }
     // Pobieranie informacji o konkretnej strefie (zone) na podstawie jej ID
     let zone = await cloudflareInstance.zones.browse(zones.result[0].id);
 

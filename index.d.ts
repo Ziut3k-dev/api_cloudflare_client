@@ -492,6 +492,17 @@ declare namespace Cloudflare {
 
     del(zone_id: string, id: string): ResponseObjectPromise;
   }
+  export interface Filters {
+    browse(zone_id: string): ResponseObjectPromise;
+
+    read(zone_id: string, ruleId: string): ResponseObjectPromise;
+
+    edit(zone_id: string, ruleId: string, rules: RulesetBody): ResponseObjectPromise;
+
+    add(zone_id: string, ruleId: string, rules: RulesetBody): ResponseObjectPromise;
+
+    del(zone_id: string, id: string): ResponseObjectPromise;
+  }
 }
 
 declare class Cloudflare {
@@ -512,6 +523,7 @@ declare class Cloudflare {
   pageRules: Cloudflare.PageRules;
   firewall: Cloudflare.Firewall;
   rulesets: Cloudflare.Rulesets;
+  filters: Cloudflare.Filters;
   constructor(auth: Cloudflare.AuthObject);
 
 }
