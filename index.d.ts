@@ -395,8 +395,8 @@ declare namespace Cloudflare {
   type FirewallFilter =
     {
       id?: string;
-      expression: string;
-      paused: boolean;
+      expression?: string;
+      paused?: boolean;
       description?: string;
       ref?: string;
     };
@@ -415,9 +415,9 @@ declare namespace Cloudflare {
   type FirewallRuleAction = 'block' | 'challenge' | 'js_challenge' | 'allow';
   type FirewallBody = {
     priority?: number;
-    filter: FirewallFilter;
+    filter?: FirewallFilter;
     action: FirewallRuleAction;
-    description?: string;
+    description: string;
     paused?: boolean;
   };
   export interface Firewall {
