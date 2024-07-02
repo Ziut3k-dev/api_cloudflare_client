@@ -22,6 +22,7 @@ const cloudflareInstance = new Cloudflare({
       allZones.push(...zones.result);
       page++;
     }
+    // console.log(allZones[0]);
     console.log(allZones.length);
     let zonesLength = allZones.length;
     while (zonesLength--) {
@@ -34,9 +35,10 @@ const cloudflareInstance = new Cloudflare({
           filter.ref === 'REW-3' ||
           filter.paused == true
         ) {
-          console.log(await cloudflareInstance.filters.del(zoneId, filter.id));
-        } else {
+          // console.log(await cloudflareInstance.filters.del(zoneId, filter.id));
           console.log(filter);
+        } else {
+          // console.log(filter);
         }
       });
       // filters.push(...zoneFilters.result);
