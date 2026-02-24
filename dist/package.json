@@ -1,6 +1,6 @@
 {
     "name": "api_cloudflare_client",
-    "version": "3.4.2",
+    "version": "3.5.0",
     "publisher": "ziut3k-dev",
     "description": "CloudFlare API client",
     "author": "Krzysztof Włodarski <wlodarski.dvy@gmail.com>",
@@ -111,6 +111,7 @@
     },
     "scripts": {
         "build": "tsc",
+        "prepublishOnly": "npm run build && npm test",
         "lint": "eslint 'index.ts' 'lib/**/*.ts' '__tests__/**/*.ts' --fix",
         "test": "jest",
         "test:coverage": "jest --coverage",
