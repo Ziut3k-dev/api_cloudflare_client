@@ -2,8 +2,6 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Cloudflare = void 0;
 const Client_1 = __importDefault(require("./lib/Client"));
 const Zones_1 = __importDefault(require("./lib/resources/Zones"));
 const Firewall_1 = __importDefault(require("./lib/resources/Firewall"));
@@ -56,5 +54,8 @@ class Cloudflare {
         this.filters = new Filters_1.default(this.client);
     }
 }
-exports.Cloudflare = Cloudflare;
-exports.default = Cloudflare;
+// @ts-ignore
+Cloudflare.Cloudflare = Cloudflare;
+// @ts-ignore
+Cloudflare.default = Cloudflare;
+module.exports = Cloudflare;

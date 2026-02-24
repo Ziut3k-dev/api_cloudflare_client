@@ -78,5 +78,10 @@ class Cloudflare {
   }
 }
 
-export default Cloudflare;
-export { Cloudflare };
+// @ts-ignore
+Cloudflare.Cloudflare = Cloudflare;
+// @ts-ignore
+Cloudflare.default = Cloudflare;
+
+export = Cloudflare;
+

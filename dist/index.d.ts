@@ -43,6 +43,5 @@ declare class Cloudflare {
     filters: Filters;
     constructor(auth: CloudflareAuthOptions);
 }
-export default Cloudflare;
-export { Cloudflare };
+export = Cloudflare;
 //# sourceMappingURL=index.d.ts.map
