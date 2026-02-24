@@ -564,25 +564,25 @@ declare namespace Cloudflare {
   export interface Rulesets {
     browse(zone_id: string): ResponseCloudflareObject<Ruleset>;
 
-    read(zone_id: string, ruleId: string): ResponseCloudflareObject<Ruleset>;
+    read(zone_id: string, rulesetId: string): ResponseCloudflareObject<Ruleset>;
 
-    edit(zone_id: string, ruleId: string, rules: RulesetBody): ResponseObjectPromise;
+    edit(zone_id: string, rulesetId: string, ruleset: RulesetBody): ResponseObjectPromise;
 
-    add(zone_id: string, ruleId: string, rules: RulesetBody): ResponseObjectPromise;
+    add(zone_id: string, ruleset: RulesetBody): ResponseObjectPromise;
 
-    del(zone_id: string, id: string): ResponseObjectPromise;
+    del(zone_id: string, rulesetId: string): ResponseObjectPromise;
   }
 
   export interface Filters {
     browse(zone_id: string): ResponseObjectPromise;
 
-    read(zone_id: string, ruleId: string): ResponseObjectPromise;
+    read(zone_id: string, filterId: string): ResponseObjectPromise;
 
-    edit(zone_id: string, ruleId: string, rules: RulesetBody): ResponseObjectPromise;
+    edit(zone_id: string, filterId: string, filter: any): ResponseObjectPromise;
 
-    add(zone_id: string, ruleId: string, rules: RulesetBody): ResponseObjectPromise;
+    add(zone_id: string, ruleId: string, filter: any): ResponseObjectPromise;
 
-    del(zone_id: string, id: string): ResponseObjectPromise;
+    del(zone_id: string, filterId: string): ResponseObjectPromise;
   }
 }
 

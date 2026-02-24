@@ -111,6 +111,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build && npm test",
     "lint": "eslint 'index.ts' 'lib/**/*.ts' '__tests__/**/*.ts' --fix",
     "test": "jest",
     "test:coverage": "jest --coverage",
