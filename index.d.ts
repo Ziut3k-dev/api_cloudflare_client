@@ -77,9 +77,9 @@ declare namespace Cloudflare {
   type ExistingDnsRecordByType<RecordType extends RecordTypes> =
     & (RecordType extends 'MX' | 'URI' ? DnsRecordWithPriority
       : RecordType extends 'SRV' ? SrvDnsRecord
-        : RecordType extends Exclude<RecordTypes, 'MX' | 'SRV' | 'URI'> ? DnsRecordWithoutPriority
-          : DnsRecord)
-    & {id: string};
+      : RecordType extends Exclude<RecordTypes, 'MX' | 'SRV' | 'URI'> ? DnsRecordWithoutPriority
+      : DnsRecord)
+    & { id: string };
 
   export interface DNSRecords {
     edit(zone_id: string, id: string, record: DnsRecord): ResponseObjectPromise;
@@ -147,19 +147,19 @@ declare namespace Cloudflare {
 
     del(zone_id: string, id: string): ResponseObjectPromise;
 
-    add(zone_id: string, config: {pattern: string; script: string}): ResponseObjectPromise;
+    add(zone_id: string, config: { pattern: string; script: string }): ResponseObjectPromise;
 
-    edit(zone_id: string, id: string, config: {pattern: string; script: string}): ResponseObjectPromise;
+    edit(zone_id: string, id: string, config: { pattern: string; script: string }): ResponseObjectPromise;
 
     read(zone_id: string, id: string): ResponseObjectPromise;
   }
 
   export interface EnterpriseZoneWorkersKVNamespaces {
-    edit(account_id: string, id: string, config: {title: string}): ResponseObjectPromise;
+    edit(account_id: string, id: string, config: { title: string }): ResponseObjectPromise;
 
     browse(account_id: string): ResponseObjectPromise;
 
-    add(account_id: string, config: {title: string}): ResponseObjectPromise;
+    add(account_id: string, config: { title: string }): ResponseObjectPromise;
 
     del(account_id: string, id: string): ResponseObjectPromise;
   }
@@ -306,7 +306,7 @@ declare namespace Cloudflare {
 
     add(zone: {
       name: string;
-      action: {id: string};
+      action: { id: string };
       jump_start?: boolean | undefined;
       type?: 'full' | 'partial' | undefined;
     }): ResponseObjectPromise;
@@ -315,7 +315,7 @@ declare namespace Cloudflare {
       id: string,
       zone: {
         name: string;
-        action: {id: string};
+        action: { id: string };
         jump_start?: boolean | undefined;
         type?: 'full' | 'partial' | undefined;
       },
@@ -327,9 +327,9 @@ declare namespace Cloudflare {
       id: string,
       params: {
         files?:
-          | string[]
-          | {url: string; headers: {Origin: string; 'CF-IPCountry': string; 'CF-Device-Type': string}}
-          | undefined;
+        | string[]
+        | { url: string; headers: { Origin: string; 'CF-IPCountry': string; 'CF-Device-Type': string } }
+        | undefined;
         tags?: string[] | undefined;
         hosts?: string[] | undefined;
         prefixes?: string[] | undefined;
@@ -419,11 +419,11 @@ declare namespace Cloudflare {
   export interface ZoneWorkersRoutes {
     browse(zone_id: string): ResponseObjectPromise;
 
-    edit(zone_id: string, id: string, config: {pattern: string; script: string}): ResponseObjectPromise;
+    edit(zone_id: string, id: string, config: { pattern: string; script: string }): ResponseObjectPromise;
 
     read(zone_id: string, id: string): ResponseObjectPromise;
 
-    add(zone_id: string, config: {pattern: string; script: string}): ResponseObjectPromise;
+    add(zone_id: string, config: { pattern: string; script: string }): ResponseObjectPromise;
 
     del(zone_id: string, id: string): ResponseObjectPromise;
   }
@@ -482,7 +482,7 @@ declare namespace Cloudflare {
 
     read(zone_id: string, id: string): ResponseObjectPromise;
 
-    edit(zone_id: string, id: string, config: {value: string}): ResponseObjectPromise;
+    edit(zone_id: string, id: string, config: { value: string }): ResponseObjectPromise;
 
     add(zone_id: string, rules: FirewallBody[]): ResponseObjectPromise;
 
@@ -497,6 +497,7 @@ declare namespace Cloudflare {
     name: string;
     phase: RulesetPhase;
     version: string;
+    rules?: RulesetRule[];
   };
   type RulesetKind = 'managed' | 'user' | 'zone' | 'custom';
   type RulesetPhase = 'ddos_l4' |
@@ -522,22 +523,42 @@ declare namespace Cloudflare {
     'magic_transit' |
     'magic_transit_ids_managed' |
     'magic_transit_managed';
-  type RulesetBody = {
-    action: 'allow' | 'block' | 'log' | 'skip';
-    action_parameters?: {
-      response?: {
-        status_code?: number;
-        content_type?: string;
-        body?: string;
-      }
-    };
+  type RulesetRule = {
+    id?: string;
+    action?: string;
+    action_parameters?: any;
+    categories?: string[];
     description?: string;
     enabled?: boolean;
-    expression: string;
+    exposed_credential_check?: {
+      password_expression: string;
+      username_expression: string;
+    };
+    expression?: string;
+    last_updated?: string;
     logging?: {
       enabled: boolean;
     };
+    ratelimit?: {
+      characteristics: string[];
+      period: number;
+      counting_expression?: string;
+      mitigation_timeout?: number;
+      requests_per_period?: number;
+      requests_to_origin?: boolean;
+      score_per_period?: number;
+      score_response_header_name?: string;
+    };
     ref?: string;
+    version?: string;
+  };
+
+  type RulesetBody = {
+    name?: string;
+    description?: string;
+    kind?: RulesetKind;
+    phase?: RulesetPhase;
+    rules: RulesetRule[];
   }
 
   export interface Rulesets {

@@ -1,0 +1,1 @@
+{"version":3,"file":"CFIPs.d.ts","sourceRoot":"","sources":["../../../lib/resources/CFIPs.ts"],"names":[],"mappings":"AAAA,OAAO,mBAAmB,MAAM,WAAW,CAAC;AAC5C,OAAO,QAAQ,MAAM,aAAa,CAAC;AAEnC;;;;;GAKG;AACH,cAAM,KAAM,SAAQ,QAAQ;IACnB,YAAY,EAAE,GAAG,CAAC;IAElB,IAAI,EAAE,MAAM,CAAC;IAEpB;;;;;OAKG;gBACS,SAAS,EAAE,mBAAmB;IAM1C;;;;;;;;;;;OAWG;IACG,MAAM;CAUb;AAED,eAAe,KAAK,CAAC"}

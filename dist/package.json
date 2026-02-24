@@ -1,0 +1,133 @@
+{
+    "name": "api_cloudflare_client",
+    "version": "3.4.2",
+    "publisher": "ziut3k-dev",
+    "description": "CloudFlare API client",
+    "author": "Krzysztof Włodarski <wlodarski.dvy@gmail.com>",
+    "bugs": {
+        "url": "https://github.com/ziut3k-dev/api_cloudflare_client/issues"
+    },
+    "engines": {
+        "node": ">= 12.0.0",
+        "npm": ">= 8.0.0"
+    },
+    "types": "index.d.ts",
+    "owners": [
+        {
+            "name": "Krzysztof Włodarski",
+            "githubUsername": "Ziut3k-dev"
+        }
+    ],
+    "dependencies": {
+        "@jest/globals": "^30.2.0",
+        "axios": "1.13.5",
+        "dotenv": "^17.3.1",
+        "jest-cli": "^30.2.0",
+        "jest-junit": "^16.0.0"
+    },
+    "devDependencies": {
+        "@eslint/eslintrc": "^3.3.4",
+        "@eslint/js": "^10.0.1",
+        "@types/jest": "^30.0.0",
+        "@types/node": "^25.3.0",
+        "coveralls-next": "^6.0.1",
+        "eslint": "^10.0.2",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-eslint-comments": "^3.2.0",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-notice": "^1.0.0",
+        "eslint-plugin-prettier": "^5.5.5",
+        "eslint-plugin-promise": "^7.2.1",
+        "eslint-plugin-security": "^4.0.0",
+        "jest": "^30.2.0",
+        "prettier": "^3.8.1",
+        "ts-jest": "^29.4.6",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.9.3"
+    },
+    "homepage": "https://github.com/ziut3k-dev/api_cloudflare_client",
+    "keywords": [
+        "cloudflare",
+        "api",
+        "client",
+        "typescript",
+        "javascript",
+        "nodejs",
+        "firewall",
+        "dns",
+        "cdn",
+        "security",
+        "performance",
+        "analytics",
+        "workers",
+        "pages",
+        "stream",
+        "access",
+        "gateway",
+        "logs",
+        "rate-limiting",
+        "load-balancing",
+        "ssl",
+        "tls",
+        "ddos",
+        "bot-management",
+        "web-application-firewall",
+        "waf",
+        "api-client",
+        "cloudflare-api",
+        "cloudflare-client",
+        "cloudflare-sdk",
+        "cloudflare-wrapper",
+        "cloudflare-library",
+        "cloudflare-integration",
+        "cloudflare-automation",
+        "cloudflare-management",
+        "cloudflare-configuration",
+        "cloudflare-deployment",
+        "cloudflare-monitoring",
+        "cloudflare-analytics",
+        "cloudflare-security",
+        "cloudflare-performance",
+        "cloudflare-workers",
+        "cloudflare-pages",
+        "cloudflare-stream",
+        "cloudflare-access",
+        "cloudflare-gateway",
+        "cloudflare-logs",
+        "cloudflare-rate-limiting",
+        "cloudflare-load-balancing",
+        "cloudflare-ssl",
+        "cloudflare-tls",
+        "cloudflare-ddos",
+        "cloudflare-bot-management",
+        "cloudflare-web-application-firewall",
+        "cloudflare-waf"
+    ],
+    "license": "MIT",
+    "main": "dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ziut3k-dev/api_cloudflare_client.git"
+    },
+    "scripts": {
+        "build": "tsc",
+        "lint": "eslint 'index.ts' 'lib/**/*.ts' '__tests__/**/*.ts' --fix",
+        "test": "jest",
+        "test:coverage": "jest --coverage",
+        "coverage": "npm run test:coverage && cat ./coverage/lcov.info | coveralls",
+        "full": "npm run build && npm run lint && npm test && npm run coverage"
+    },
+    "files": [
+        "dist",
+        "index.d.ts"
+    ],
+    "xo": {
+        "space": true,
+        "rules": {
+            "unicorn/filename-case": 0
+        }
+    },
+    "publishConfig": {
+        "tag": "latest"
+    }
+}

@@ -1,0 +1,48 @@
+import Client, { CloudflareAuthOptions } from './lib/Client';
+import Zones from './lib/resources/Zones';
+import Firewall from './lib/resources/Firewall';
+import DNSRecords from './lib/resources/DNSRecords';
+import AccessApplications from './lib/resources/AccessApplications';
+import ArgoTunnels from './lib/resources/ArgoTunnels';
+import CFIPs from './lib/resources/CFIPs';
+import PageRules from './lib/resources/PageRules';
+import ZoneSettings from './lib/resources/ZoneSettings';
+import User from './lib/resources/User';
+import UserTokens from './lib/resources/UserTokens';
+import ZoneCustomHostNames from './lib/resources/ZoneCustomHostNames';
+import ZoneWorkers from './lib/resources/ZoneWorkers';
+import ZoneWorkersRoutes from './lib/resources/ZoneWorkersRoutes';
+import ZoneWorkersScript from './lib/resources/ZoneWorkersScript';
+import EnterpriseZoneWorkersScripts from './lib/resources/EnterpriseZoneWorkersScripts';
+import EnterpriseZoneWorkersRoutes from './lib/resources/EnterpriseZoneWorkersRoutes';
+import EnterpriseZoneWorkersKVNamespaces from './lib/resources/EnterpriseZoneWorkersKVNamespaces';
+import EnterpriseZoneWorkersKV from './lib/resources/EnterpriseZoneWorkersKV';
+import Rulesets from './lib/resources/Rulesets';
+import Filters from './lib/resources/Filters';
+declare class Cloudflare {
+    client: Client;
+    zones: Zones;
+    dnsRecords: DNSRecords;
+    firewall: Firewall;
+    accessApplications: AccessApplications;
+    argoTunnels: ArgoTunnels;
+    ips: CFIPs;
+    pageRules: PageRules;
+    zoneSettings: ZoneSettings;
+    zoneWorkers: ZoneWorkers;
+    zoneWorkersRoutes: ZoneWorkersRoutes;
+    zoneWorkersScript: ZoneWorkersScript;
+    enterpriseZoneWorkersScripts: EnterpriseZoneWorkersScripts;
+    enterpriseZoneWorkersRoutes: EnterpriseZoneWorkersRoutes;
+    enterpriseZoneWorkersKVNamespaces: EnterpriseZoneWorkersKVNamespaces;
+    enterpriseZoneWorkersKV: EnterpriseZoneWorkersKV;
+    user: User;
+    userTokens: UserTokens;
+    zoneCustomHostNames: ZoneCustomHostNames;
+    rulesets: Rulesets;
+    filters: Filters;
+    constructor(auth: CloudflareAuthOptions);
+}
+export default Cloudflare;
+export { Cloudflare };
+//# sourceMappingURL=index.d.ts.map
