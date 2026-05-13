@@ -18,7 +18,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org'
           cache: npm
 
       - run: npm ci
@@ -29,23 +28,13 @@ jobs:
       - name: Unit tests
         run: npx jest --testPathPatterns=spec
 
-      - name: Check npm auth
-        run: npm whoami
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Publish to npm
-        id: publish
-        run: npm publish --ignore-scripts 2>&1 | tee /tmp/npm-publish.log; exit ${PIPESTATUS[0]}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          npm whoami
+          npm publish --ignore-scripts
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Upload publish log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: npm-publish-log
-          path: /tmp/npm-publish.log
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
