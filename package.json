@@ -111,7 +111,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "npm run build && jest --testPathPattern=spec",
+    "prepublishOnly": "npm run build && jest --testPathPatterns=spec",
     "lint": "eslint 'index.ts' 'lib/**/*.ts' '__tests__/**/*.ts' --fix",
     "test": "jest",
     "test:coverage": "jest --coverage",
