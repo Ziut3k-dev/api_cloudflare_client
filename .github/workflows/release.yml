@@ -27,7 +27,7 @@ jobs:
         run: npm run build
 
       - name: Unit tests
-        run: jest --testPathPatterns=spec
+        run: npx jest --testPathPatterns=spec
 
       - name: Publish to npm
         run: npm publish --access public
