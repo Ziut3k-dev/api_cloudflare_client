@@ -4,3 +4,7 @@ coverage/
 .travis.yml
 .env
 **/.DS_Store
+.claude
+.claude-flow
+.mcp.json
+CLAUDE.md
