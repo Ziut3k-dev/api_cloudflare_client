@@ -32,7 +32,7 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
           npm whoami
-          npm publish --ignore-scripts
+          npm publish --tag v3-latest
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
