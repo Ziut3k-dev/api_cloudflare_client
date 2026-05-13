@@ -1,6 +1,6 @@
 {
   "name": "api_cloudflare_client",
-  "version": "4.2.0",
+  "version": "3.5.0",
   "publisher": "ziut3k-dev",
   "description": "CloudFlare API client",
   "author": "Krzysztof Włodarski <wlodarski.dvy@gmail.com>",
@@ -8,7 +8,7 @@
     "url": "https://github.com/ziut3k-dev/api_cloudflare_client/issues"
   },
   "engines": {
-    "node": ">= 20.0.0",
+    "node": ">= 12.0.0",
     "npm": ">= 8.0.0"
   },
   "types": "index.d.ts",
