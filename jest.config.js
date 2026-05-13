@@ -16,7 +16,7 @@ const config = {
   ],
   testRunner: 'jest-circus/runner',
   testTimeout: 30000,
-  modulePathIgnorePatterns: ['<rootDir>/dist/'],
+  modulePathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/.claude/'],
 };
 
 module.exports = config;
