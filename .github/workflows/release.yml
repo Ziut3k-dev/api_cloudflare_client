@@ -35,9 +35,17 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to npm
-        run: npm publish --ignore-scripts
+        id: publish
+        run: npm publish --ignore-scripts 2>&1 | tee /tmp/npm-publish.log; exit ${PIPESTATUS[0]}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Upload publish log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-publish-log
+          path: /tmp/npm-publish.log
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
