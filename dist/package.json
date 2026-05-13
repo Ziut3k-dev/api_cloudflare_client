@@ -1,6 +1,6 @@
 {
     "name": "api_cloudflare_client",
-    "version": "3.5.0",
+    "version": "5.0.0",
     "publisher": "ziut3k-dev",
     "description": "CloudFlare API client",
     "author": "Krzysztof Włodarski <wlodarski.dvy@gmail.com>",
@@ -27,12 +27,12 @@
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3.3.4",
-        "@eslint/js": "^10.0.1",
+        "@eslint/js": "^9.0.0",
         "@types/jest": "^30.0.0",
         "@types/node": "^25.3.0",
         "coveralls-next": "^6.0.1",
-        "eslint": "^10.0.2",
-        "eslint-config-prettier": "^10.1.8",
+        "eslint": "^9.0.0",
+        "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-eslint-comments": "^3.2.0",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-notice": "^1.0.0",
@@ -111,7 +111,7 @@
     },
     "scripts": {
         "build": "tsc",
-        "prepublishOnly": "npm run build && npm test",
+        "prepublishOnly": "npm run build && npx jest --testPathPatterns=spec",
         "lint": "eslint 'index.ts' 'lib/**/*.ts' '__tests__/**/*.ts' --fix",
         "test": "jest",
         "test:coverage": "jest --coverage",
