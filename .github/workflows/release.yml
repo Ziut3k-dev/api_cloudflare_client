@@ -18,6 +18,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
           cache: npm
 
       - run: npm ci
@@ -29,12 +30,9 @@ jobs:
         run: npx jest --testPathPatterns=spec
 
       - name: Publish to npm
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-          npm whoami 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
-          npm publish --tag v3-latest 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+        run: npm publish --tag v3-latest
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
