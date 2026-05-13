@@ -28,6 +28,11 @@ const mockApiClient = {
         await instance.edit('test-id', 'test-id', 'test-id');
         (0, globals_1.expect)(mockApiClient.request).toHaveBeenCalled();
     });
+    (0, globals_1.test)('add should call request', async () => {
+        mockApiClient.request.mockResolvedValueOnce({ success: true });
+        await instance.add('test-id', {});
+        (0, globals_1.expect)(mockApiClient.request).toHaveBeenCalled();
+    });
     (0, globals_1.test)('del should call request', async () => {
         mockApiClient.request.mockResolvedValueOnce({ success: true });
         await instance.del('test-id', 'test-id');
