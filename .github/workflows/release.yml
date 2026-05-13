@@ -2,8 +2,8 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - master
 
 jobs:
   release:
@@ -13,6 +13,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Use Node.js 20
         uses: actions/setup-node@v4
@@ -29,13 +31,37 @@ jobs:
       - name: Unit tests
         run: npx jest --testPathPatterns=spec
 
+      - name: Get version
+        id: version
+        run: echo "value=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Check if version already published
+        id: check
+        run: |
+          if npm view api_cloudflare_client@${{ steps.version.outputs.value }} version 2>/dev/null; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Tag release
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "v${{ steps.version.outputs.value }}" -m "v${{ steps.version.outputs.value }}"
+          git push origin "v${{ steps.version.outputs.value }}"
+
       - name: Publish to npm
+        if: steps.check.outputs.exists == 'false'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
+        if: steps.check.outputs.exists == 'false'
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: v${{ steps.version.outputs.value }}
           generate_release_notes: true
           body_path: CHANGELOG.md
